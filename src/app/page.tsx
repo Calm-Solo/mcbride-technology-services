@@ -68,6 +68,11 @@ export default function Home() {
             </div>
             <h2 className="text-xl md:text-2xl font-bold mb-2">IT Support</h2>
             <p className="text-blue-100 text-sm md:text-base">Protect your business with our comprehensive security solutions.</p>
+            <div className="mt-4">
+              <Link href="/it-support" className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors inline-block">
+                View Services
+              </Link>
+            </div>
           </div>
           
           {/* Service Card 3 */}
