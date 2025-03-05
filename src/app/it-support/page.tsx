@@ -45,7 +45,7 @@ export default function ITSupport() {
       <div className="flex-grow flex flex-col items-center p-4 md:p-8">
         <h1 className="text-3xl md:text-5xl font-bold mb-6 md:mb-8 text-center">IT Support Services</h1>
         <p className="text-lg md:text-xl text-center max-w-3xl mb-10">
-          Professional IT support for businesses and individuals. From hardware setup to data recovery, we've got you covered.
+          Professional IT support for businesses and individuals. From hardware setup to data recovery, we&apos;ve got you covered.
         </p>
         
         {/* Hero Banner */}
@@ -104,16 +104,16 @@ export default function ITSupport() {
             </div>
             <h3 className="text-xl font-bold mb-3 text-center">Data Recovery Services</h3>
             <p className="text-blue-100 mb-4">
-              Don't panic when you lose important data. Our recovery services can help retrieve lost files from:
+              Don&apos;t panic when you lose important data. Our recovery services can help retrieve lost files from:
             </p>
             <ul className="list-disc pl-5 space-y-2 text-blue-100">
               <li>USB flash drives</li>
-              <li>Micro SD cards</li>
               <li>External hard drives</li>
-              <li>Laptops and desktop computers</li>
+              <li>Micro SD cards</li>
+              <li>Memory cards</li>
               <li>Accidentally deleted files</li>
-              <li>Corrupted storage media</li>
               <li>Formatted drives</li>
+              <li>Corrupted storage media</li>
             </ul>
           </div>
           
@@ -124,23 +124,22 @@ export default function ITSupport() {
             </div>
             <h3 className="text-xl font-bold mb-3 text-center">Computer Setup & Maintenance</h3>
             <p className="text-blue-100 mb-4">
-              Complete setup and optimization of your new or existing computers:
+              Get your new computer set up properly or keep your existing system running smoothly:
             </p>
             <ul className="list-disc pl-5 space-y-2 text-blue-100">
-              <li>New computer setup and configuration</li>
-              <li>Software installation and updates</li>
-              <li>Data migration from old devices</li>
-              <li>Performance optimization</li>
+              <li>New computer setup and data migration</li>
+              <li>Software installation and configuration</li>
+              <li>System optimization for better performance</li>
               <li>Virus and malware removal</li>
-              <li>Regular maintenance and tune-ups</li>
-              <li>Hardware upgrades</li>
+              <li>Regular maintenance and updates</li>
+              <li>Hardware upgrades and repairs</li>
             </ul>
           </div>
         </div>
         
         {/* Additional Services */}
         <div className="bg-white/10 backdrop-blur-sm p-6 md:p-8 rounded-xl max-w-5xl w-full mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">Additional IT Services</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center">Additional IT Services</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-4 bg-blue-700/20 rounded-lg">
