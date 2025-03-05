@@ -77,6 +77,11 @@ export default function Home() {
             </div>
             <h2 className="text-xl md:text-2xl font-bold mb-2">Freelance Engineering</h2>
             <p className="text-blue-100 text-sm md:text-base">Regression testing, automation, and more.</p>
+            <div className="mt-4">
+              <Link href="/freelance-engineering" className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors inline-block">
+                Learn More
+              </Link>
+            </div>
           </div>
         </div>
       </div>
