@@ -58,9 +58,9 @@ export default function ContactComponent() {
                                 <h3 className="text-xl font-bold text-primary_light">Phone</h3>
                             </div>
                             <p className="text-st_light mb-2">Main Office:</p>
-                            <p className="text-st_white font-bold">(555) 123-4567</p>
+                            <p className="text-st_white font-bold">(916) 269-7703</p>
                             <p className="text-st_light mt-4 mb-2">Support Line:</p>
-                            <p className="text-st_white font-bold">(555) 987-6543</p>
+                            <p className="text-st_white font-bold">(916) 269-7703</p>
                         </div>
 
                         <div className="bg-st_dark p-6 rounded-lg">
@@ -69,9 +69,9 @@ export default function ContactComponent() {
                                 <h3 className="text-xl font-bold text-primary_light">Email</h3>
                             </div>
                             <p className="text-st_light mb-2">General Inquiries:</p>
-                            <p className="text-st_white font-bold">info@mcbridetechnology.com</p>
+                            <p className="text-st_white font-bold">mdrservices916@gmail.com</p>
                             <p className="text-st_light mt-4 mb-2">Support:</p>
-                            <p className="text-st_white font-bold">support@mcbridetechnology.com</p>
+                            <p className="text-st_white font-bold">mdrservices916@gmail.com</p>
                         </div>
 
                         <div className="bg-st_dark p-6 rounded-lg">

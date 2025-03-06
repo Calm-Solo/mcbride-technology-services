@@ -12,7 +12,7 @@ export default function ContactComponentServer() {
                 backgroundClass="bg-primary_darkest"
                 withAnimation={true}
             />
-
+        
             {/* Include the client component for the form and other interactive elements */}
             <ContactComponent />
         </>
