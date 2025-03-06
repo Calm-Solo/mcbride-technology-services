@@ -1,0 +1,347 @@
+import React from 'react';
+import HeroSection from '@/components/ui/HeroSection';
+import PriceCard from '@/components/ui/PriceCard';
+import ServiceCard from '@/components/ui/ServiceCard';
+
+export default function WebDevelopmentComponentServer() {
+    return (
+        <>
+            <HeroSection
+                title="Web Development Services"
+                description="We offer professional web development services tailored to your business needs. Choose from our flexible pricing plans below or contact us for a custom quote."
+                buttons={[
+                    {
+                        text: 'Request a Quote',
+                        link: '/contact',
+                        className: 'btn-primary',
+                    },
+                ]}
+            />
+
+            {/* Services Overview */}
+            <section className="bg-st_dark py-16">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-6xl mx-auto">
+                        <h2 className="text-3xl font-bold mb-12 text-center text-primary_light">Our Web Development Services</h2>
+
+                        <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
+                            {/* Service 1 */}
+                            <ServiceCard
+                                title="Custom Website Development"
+                                description="We create beautiful, responsive websites tailored to your brand and business objectives. Our sites are
+                                    designed with both aesthetics and functionality in mind."
+                                features={[
+                                    'Responsive design for all devices',
+                                    'Search engine optimization (SEO)',
+                                    'Content management systems (CMS)',
+                                    'E-commerce functionality',
+                                    'Accessibility compliance',
+                                ]}
+                            />
+
+                            {/* Service 2 */}
+                            <ServiceCard
+                                title="Web Application Development"
+                                description="Transform your business processes with custom web applications designed to streamline operations, improve efficiency, and enhance user experience."
+                                features={[
+                                    'Custom business solutions',
+                                    'Client portals and dashboards',
+                                    'Data visualization tools',
+                                    'API integration',
+                                    'Progressive web apps (PWAs)',
+                                ]}
+                            />
+
+                            {/* Service 3 */}
+                            <ServiceCard
+                                title="Website Maintenance & Support"
+                                description="Keep your website secure, up-to-date, and performing optimally with our comprehensive maintenance and support services."
+                                features={[
+                                    'Regular updates and security patches',
+                                    'Performance optimization',
+                                    'Content updates and management',
+                                    'Backup and recovery solutions',
+                                    'Technical support and troubleshooting',
+                                ]}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Pricing Plans */}
+            <section className="bg-st_darkest py-16">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-6xl mx-auto">
+                        <h2 className="text-3xl font-bold mb-12 text-center text-primary_light">Website Development Pricing</h2>
+
+                        <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
+                            {/* Basic Plan */}
+                            <PriceCard
+                                title="Basic Website"
+                                price="$1,200"
+                                priceSubtext="One-time payment"
+                                features={[
+                                    'Up to 5 pages',
+                                    'Mobile responsive design',
+                                    'Contact form',
+                                    'Basic SEO setup',
+                                    'Social media integration',
+                                ]}
+                                buttonText="Get Started"
+                                buttonLink="/contact"
+                            />
+
+                            {/* Professional Plan */}
+                            <PriceCard
+                                title="Business Website"
+                                price="$2,500"
+                                priceSubtext="One-time payment"
+                                features={[
+                                    'Up to 10 pages',
+                                    'Advanced responsive design',
+                                    'Content Management System',
+                                    'Advanced SEO optimization',
+                                    'Google Analytics integration',
+                                    'Blog functionality',
+                                ]}
+                                buttonText="Get Started"
+                                buttonLink="/contact"
+                                isPopular={true}
+                                isHighlighted={true}
+                            />
+
+                            {/* E-commerce Plan */}
+                            <PriceCard
+                                title="E-commerce"
+                                price="$4,000+"
+                                priceSubtext="Starting price"
+                                features={[
+                                    'Full e-commerce functionality',
+                                    'Product management system',
+                                    'Payment gateway integration',
+                                    'Inventory management',
+                                    'Customer account system',
+                                    'Order tracking & management',
+                                ]}
+                                buttonText="Get Started"
+                                buttonLink="/contact"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Maintenance Plans */}
+            <section className="bg-st_dark py-16">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-6xl mx-auto">
+                        <h2 className="text-2xl md:text-3xl font-bold mb-12 text-center text-primary_light">Website Maintenance Plans</h2>
+                        <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
+                            {/* Basic Maintenance */}
+                            <PriceCard
+                                title="Basic Maintenance"
+                                price="$75"
+                                priceSubtext="/month"
+                                features={['Software updates', 'Security monitoring', 'Monthly backups', '1 hour of content updates']}
+                                buttonText="Select Plan"
+                                buttonLink="/contact"
+                                backgroundClass="bg-st_darkest"
+                            />
+
+                            {/* Standard Maintenance */}
+                            <PriceCard
+                                title="Standard Maintenance"
+                                price="$150"
+                                priceSubtext="/month"
+                                features={[
+                                    'All Basic features',
+                                    'Weekly backups',
+                                    '3 hours of content updates',
+                                    'Performance optimization',
+                                    'Monthly analytics report',
+                                ]}
+                                buttonText="Select Plan"
+                                buttonLink="/contact"
+                                backgroundClass="bg-st_darkest"
+                            />
+
+                            {/* Premium Maintenance */}
+                            <PriceCard
+                                title="Premium Maintenance"
+                                price="$300"
+                                priceSubtext="/month"
+                                features={[
+                                    'All Standard features',
+                                    'Daily backups',
+                                    '6 hours of content updates',
+                                    'Priority support (24hr response)',
+                                    'SEO monitoring & updates',
+                                    'Conversion optimization',
+                                ]}
+                                buttonText="Select Plan"
+                                buttonLink="/contact"
+                                backgroundClass="bg-st_darkest"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Custom Solutions */}
+            <section className="bg-st_darkest py-16">
+                <div className="container mx-auto px-4">
+                    <div className="bg-st_dark p-6 md:p-8 rounded-lg max-w-4xl mx-auto">
+                        <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center text-primary_light">Need a Custom Solution?</h2>
+                        <p className="text-center mb-6 text-st_white">
+                            Every business has unique requirements. Contact us for a personalized quote tailored to your specific needs.
+                        </p>
+                        <div className="text-center">
+                            <a href="/contact" className="btn-primary inline-block">
+                                Request a Quote
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Technologies */}
+            <section className="bg-st_darkest py-16">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-4xl mx-auto">
+                        <h2 className="text-3xl font-bold mb-12 text-center text-primary_light">Our Technologies</h2>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div className="card text-center">
+                                <h3 className="text-xl font-bold mb-4 text-primary">Frontend</h3>
+                                <ul className="text-st_white space-y-2">
+                                    <li>React</li>
+                                    <li>Next.js</li>
+                                    <li>Vue.js</li>
+                                    <li>Angular</li>
+                                    <li>HTML5/CSS3</li>
+                                    <li>Tailwind CSS</li>
+                                </ul>
+                            </div>
+
+                            <div className="card text-center">
+                                <h3 className="text-xl font-bold mb-4 text-primary">Backend</h3>
+                                <ul className="text-st_white space-y-2">
+                                    <li>Node.js</li>
+                                    <li>Express</li>
+                                    <li>PHP</li>
+                                    <li>Python</li>
+                                    <li>Ruby on Rails</li>
+                                    <li>.NET</li>
+                                </ul>
+                            </div>
+
+                            <div className="card text-center">
+                                <h3 className="text-xl font-bold mb-4 text-primary">Database & CMS</h3>
+                                <ul className="text-st_white space-y-2">
+                                    <li>MongoDB</li>
+                                    <li>MySQL</li>
+                                    <li>PostgreSQL</li>
+                                    <li>WordPress</li>
+                                    <li>Shopify</li>
+                                    <li>Contentful</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Process */}
+            <section className="bg-st_dark py-16">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-4xl mx-auto">
+                        <h2 className="text-3xl font-bold mb-12 text-center text-primary_light">Our Development Process</h2>
+
+                        <div className="space-y-8">
+                            <div className="card flex flex-col md:flex-row md:items-center">
+                                <div className="bg-primary text-st_darkest text-center font-bold text-3xl rounded-full w-12 h-12 flex items-center justify-center mb-4 md:mb-0 md:mr-6 flex-shrink-0 mx-auto md:mx-0">
+                                    1
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold mb-2 text-primary text-center md:text-left">Discovery & Planning</h3>
+                                    <p className="text-st_white">
+                                        We start by understanding your business goals, target audience, and project requirements to create a
+                                        detailed development plan.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="card flex flex-col md:flex-row md:items-center">
+                                <div className="bg-primary text-st_darkest text-center font-bold text-3xl rounded-full w-12 h-12 flex items-center justify-center mb-4 md:mb-0 md:mr-6 flex-shrink-0 mx-auto md:mx-0">
+                                    2
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold mb-2 text-primary text-center md:text-left">Design & Prototyping</h3>
+                                    <p className="text-st_white">
+                                        We create wireframes and design mockups of your website or application, ensuring the visual elements
+                                        align with your brand identity.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="card flex flex-col md:flex-row md:items-center">
+                                <div className="bg-primary text-st_darkest text-center font-bold text-3xl rounded-full w-12 h-12 flex items-center justify-center mb-4 md:mb-0 md:mr-6 flex-shrink-0 mx-auto md:mx-0">
+                                    3
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold mb-2 text-primary text-center md:text-left">Development & Testing</h3>
+                                    <p className="text-st_white">
+                                        Our developers build your website or application following best practices and conduct thorough
+                                        testing to ensure quality and performance.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="card flex flex-col md:flex-row md:items-center">
+                                <div className="bg-primary text-st_darkest text-center font-bold text-3xl rounded-full w-12 h-12 flex items-center justify-center mb-4 md:mb-0 md:mr-6 flex-shrink-0 mx-auto md:mx-0">
+                                    4
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold mb-2 text-primary text-center md:text-left">Deployment & Launch</h3>
+                                    <p className="text-st_white">
+                                        We deploy your website or application to your hosting environment and ensure everything is
+                                        functioning correctly before launch.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="card flex flex-col md:flex-row md:items-center">
+                                <div className="bg-primary text-st_darkest text-center font-bold text-3xl rounded-full w-12 h-12 flex items-center justify-center mb-4 md:mb-0 md:mr-6 flex-shrink-0 mx-auto md:mx-0">
+                                    5
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold mb-2 text-primary text-center md:text-left">Support & Maintenance</h3>
+                                    <p className="text-st_white">
+                                        We provide ongoing support and maintenance to keep your website or application secure, up-to-date,
+                                        and performing optimally.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Call to Action */}
+            <section className="bg-primary py-16">
+                <div className="container mx-auto px-4 text-center">
+                    <h2 className="text-3xl font-bold mb-4 text-st_darkest">Ready to start your project?</h2>
+                    <p className="text-st_darkest text-lg mb-8 max-w-2xl mx-auto">
+                        Contact us today to discuss your web development needs and get a free consultation.
+                    </p>
+                    <a
+                        href="/contact"
+                        className="bg-st_darkest text-primary_light hover:bg-st_dark transition-colors font-bold py-3 px-8 rounded-lg">
+                        Get Started
+                    </a>
+                </div>
+            </section>
+        </>
+    );
+}
