@@ -90,7 +90,7 @@ export default function ContactComponentServer() {
 
                             <div className="p-6 rounded-lg bg-st_dark shadow-md">
                                 <h3 className="text-xl font-bold mb-2 text-primary">Phone</h3>
-                                <p className="text-st_white">(555) 123-4567</p>
+                                <p className="text-st_white">(916) 269-7703</p>
                             </div>
 
                             <div className="p-6 rounded-lg bg-st_dark shadow-md">
