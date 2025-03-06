@@ -48,19 +48,6 @@ export default function ContactComponent() {
 
     return (
         <div className="bg-st_darkest text-st_white">
-            {/* Hero Section */}
-            <section className="py-16 bg-primary_darkest">
-                <div className="container mx-auto px-4 text-center group">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6 text-st_white group-hover:text-gold_dark transition-colors">
-                        Contact Us
-                    </h1>
-                    <p className="text-xl text-st_light max-w-3xl mx-auto group-hover:text-st_white transition-colors">
-                        Have questions about your technology needs? Our team of experts is here to help. Schedule a consultation or reach
-                        out with any questions.
-                    </p>
-                </div>
-            </section>
-
             {/* Contact Information */}
             <section className="py-12 bg-st">
                 <div className="container mx-auto px-4">

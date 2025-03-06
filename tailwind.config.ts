@@ -16,7 +16,7 @@ const config: Config = {
                 mono: ['var(--font-geist-mono)'],
             },
             colors: {
-                primary_darkest: '#22577a', // Lapis Lazuli
+                primary_darkest: '# ', // Lapis Lazuli
                 primary_dark: '#38a3a5', // Verdigris
                 primary: '#57cc99', // Emerald
                 primary_light: '#80ed99', // Aquamarine
