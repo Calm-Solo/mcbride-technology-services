@@ -47,10 +47,8 @@ export default function PriceCard({
 
             <div className={`${headerBackgroundClass} p-4 text-center`}>
                 <h2 className="text-2xl font-bold text-st_darkest">{title}</h2>
-                <p className="text-3xl font-bold mt-2 text-st_darkest">
-                    {price}
-                    {priceSubtext && <span className="text-lg">{priceSubtext}</span>}
-                </p>
+                <p className="text-3xl font-bold mt-2 text-st_darkest">{price}</p>
+                {priceSubtext && <p className="text-lg text-st_darkest mt-1">{priceSubtext}</p>}
             </div>
 
             <div className="p-6">
