@@ -32,7 +32,7 @@ export default function NavbarItems({ items, page, isMobile = false }: NavbarIte
                     <div
                         key={menuClassName}
                         className={`cursor-pointer items-center justify-center ${
-                            isCurrentPage ? 'text-primary' : 'text-st_white hover:text-primary'
+                            isCurrentPage ? 'text-primary font-bold' : 'text-st_white hover:text-primary_light'
                         } ${isMobile ? 'py-2' : ''}`}>
                         <Link href={href}>{menuFullName}</Link>
                     </div>
