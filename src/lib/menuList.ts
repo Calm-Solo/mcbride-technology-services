@@ -8,6 +8,7 @@ export const navbarMenuList: [string, string, string][] = [
     ['it-support', 'IT Support', '/it-support'],
     ['web-development', 'Web Development', '/web-development'],
     ['engineering', 'Engineering', '/engineering'],
+    ['portfolio', 'Portfolio', '/portfolio'],
     ['contact', 'Contact', '/contact'],
 ];
 
@@ -16,6 +17,7 @@ export const footerMenuList: [string, string, string][] = [
     ['it-support', 'IT Support', '/it-support'],
     ['web-development', 'Web Development', '/web-development'],
     ['engineering', 'Engineering', '/engineering'],
+    ['portfolio', 'Portfolio', '/portfolio'],
     ['contact', 'Contact', '/contact'],
     ['privacy', 'Privacy Policy', '/privacy'],
     ['terms', 'Terms of Use', '/terms'],

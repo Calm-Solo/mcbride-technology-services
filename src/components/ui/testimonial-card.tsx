@@ -18,7 +18,7 @@ interface TestimonialCardProps {
 
 export function TestimonialCard({ author, text, href }: TestimonialCardProps) {
     const CardContent = () => (
-        <div className="group/testimonial flex flex-col gap-4 rounded-xl border border-st_dark bg-st_darkest p-6 shadow-lg transition-all hover:bg-st_dark w-[280px] sm:w-[320px]">
+        <div className="group/testimonial flex h-fit flex-col gap-4 rounded-xl border border-st_dark bg-st_darkest p-6 shadow-lg transition-all hover:bg-st_dark">
             <div className="flex items-center gap-4">
                 <div className="relative h-12 w-12 overflow-hidden rounded-full border-2 border-primary">
                     <Image src={author.avatar} alt={author.name} fill className="object-cover" />
@@ -37,7 +37,7 @@ export function TestimonialCard({ author, text, href }: TestimonialCardProps) {
                 </div>
             </div>
 
-            <div>
+            <div className="flex-1 overflow-y-auto">
                 <p className="text-sm/relaxed text-st_lightest group-hover/testimonial:text-st_white">{text}</p>
             </div>
         </div>

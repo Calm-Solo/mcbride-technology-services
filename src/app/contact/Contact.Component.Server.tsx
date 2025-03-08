@@ -35,7 +35,7 @@ export default function ContactComponentServer() {
                 contentBgOpacity={0.7}
                 glowColor="primary"
                 glowSize="100px"
-                wavyBlur={15}
+                wavyBlur={8}
                 wavySpeed="fast"
                 wavyWaveWidth={60}
                 wavyWaveOpacity={0.6}
