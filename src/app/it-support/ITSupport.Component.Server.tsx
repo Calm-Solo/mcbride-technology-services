@@ -1,7 +1,7 @@
 import React from 'react';
 import HeroSection from '@/components/ui/HeroSection';
 import PriceCard from '@/components/ui/PriceCard';
-import ServiceCard from '@/components/ui/ServiceCard';
+import ServicesCard from '@/components/ui/services-card';
 
 export default function ITSupportComponentServer() {
     return (
@@ -13,9 +13,30 @@ export default function ITSupportComponentServer() {
                     {
                         text: 'Get a Quote',
                         link: '/contact',
-                        className: 'btn-primary',
+                        isPrimary: true,
+                        textColor: 'st_darkest',
+                        textHoverColor: 'st_darkest',
+                        bgColor: 'primary',
+                        bgHoverColor: 'primary_light',
+                        borderColor: 'primary',
+                        iconName: 'ArrowRight',
+                        iconPosition: 'right',
+                        animation: {
+                            type: 'slide',
+                            delay: 0.1,
+                        },
                     },
                 ]}
+                backgroundClass="bg-st_darkest"
+                titleColorClass="text-primary"
+                descriptionColorClass="text-st_lightest"
+                withAnimation={true}
+                backgroundType="particles"
+                particleColor="rgba(87, 204, 153, 0.5)"
+                particleCount={100}
+                contentBgOpacity={0.8}
+                glowColor="primary_dark"
+                glowSize="90px"
             />
 
             {/* Services Overview */}
@@ -24,43 +45,22 @@ export default function ITSupportComponentServer() {
                     <div className="max-w-6xl mx-auto">
                         <h2 className="text-3xl font-bold mb-12 text-center text-primary_light">Our IT Support Services</h2>
 
-                        <div className="flex flex-wrap gap-8 justify-center items-center">
-                            {/* Service 1 */}
-                            <ServiceCard
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center">
+                            <ServicesCard
                                 title="Help Desk Support"
                                 description="Our responsive help desk provides timely assistance for all your technical issues. From software troubleshooting to hardware problems, we've got you covered."
-                                features={[
-                                    'Remote technical support',
-                                    'Software troubleshooting',
-                                    'Hardware diagnostics',
-                                    'User account management',
-                                    'Quick response times',
-                                ]}
+                                link="/contact?service=helpdesk"
+                                iconName="Server"
                             />
 
-                            {/* Service 2 */}
-                            <ServiceCard
+                            <ServicesCard
                                 title="Network Management"
                                 description="Keep your business connected with our comprehensive network management services. We ensure your network remains secure, fast, and reliable."
-                                features={[
-                                    'Network design and implementation',
-                                    'Router and switch configuration',
-                                    'Wireless network setup and optimization',
-                                    'Network security and monitoring',
-                                ]}
+                                link="/contact?service=network"
+                                iconName="Globe"
                             />
 
-                            {/* Service 3 */}
-                            <ServiceCard
-                                title="Cybersecurity"
-                                description="Protect your business from digital threats with our comprehensive cybersecurity solutions. We implement multi-layered security measures to safeguard your valuable data."
-                                features={[
-                                    'Firewall setup and management',
-                                    'Antivirus and anti-malware protection',
-                                    'Security audits and vulnerability assessments',
-                                    'Data backup and disaster recovery',
-                                ]}
-                            />
+                            {/* Additional services can be added here */}
                         </div>
                     </div>
                 </div>

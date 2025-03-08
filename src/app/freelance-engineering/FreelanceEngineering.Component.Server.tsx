@@ -8,14 +8,49 @@ export default function FreelanceEngineeringComponentServer() {
         <>
             <HeroSection
                 title="Freelance Engineering Services"
-                description="Expert engineering solutions for your specialized technical projects"
+                description="Expert software engineering and development services for your specialized technical projects"
                 buttons={[
                     {
-                        text: 'Request a Consultation',
+                        text: 'Get a Quote',
                         link: '/contact',
-                        className: 'btn-primary',
+                        isPrimary: true,
+                        textColor: 'st_darkest',
+                        textHoverColor: 'st_darkest',
+                        bgColor: 'primary',
+                        bgHoverColor: 'primary_light',
+                        borderColor: 'primary',
+                        iconName: 'FileCode',
+                        iconPosition: 'left',
+                        animation: {
+                            type: 'pulse',
+                            delay: 0.1,
+                        },
+                    },
+                    {
+                        text: 'Learn More',
+                        link: '#services',
+                        textColor: 'primary',
+                        textHoverColor: 'st_white',
+                        bgColor: '',
+                        bgHoverColor: 'primary',
+                        borderColor: 'primary',
+                        iconName: 'ChevronDown',
+                        iconPosition: 'right',
+                        animation: {
+                            type: 'bounce',
+                            delay: 0.2,
+                        },
                     },
                 ]}
+                backgroundClass="bg-st_darkest"
+                titleColorClass="text-primary"
+                descriptionColorClass="text-st_lightest"
+                withAnimation={true}
+                backgroundType="magnetLines"
+                magnetLinesColor="rgba(0, 128, 128, 0.3)"
+                contentBgOpacity={0.65}
+                glowColor="primary_darkest"
+                glowSize="110px"
             />
 
             {/* Services Overview */}

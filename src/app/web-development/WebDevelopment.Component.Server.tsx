@@ -1,7 +1,7 @@
 import React from 'react';
 import HeroSection from '@/components/ui/HeroSection';
 import PriceCard from '@/components/ui/PriceCard';
-import ServiceCard from '@/components/ui/ServiceCard';
+import ServicesCard from '@/components/ui/services-card';
 
 export default function WebDevelopmentComponentServer() {
     return (
@@ -13,9 +13,28 @@ export default function WebDevelopmentComponentServer() {
                     {
                         text: 'Request a Quote',
                         link: '/contact',
-                        className: 'btn-primary',
+                        isPrimary: true,
+                        textColor: 'st_darkest',
+                        textHoverColor: 'st_darkest',
+                        bgColor: 'primary',
+                        bgHoverColor: 'primary_light',
+                        borderColor: 'primary',
+                        iconName: 'ArrowRight',
+                        iconPosition: 'right',
+                        animation: {
+                            type: 'slide',
+                            delay: 0.1,
+                        },
                     },
                 ]}
+                backgroundClass="bg-st_darkest"
+                titleColorClass="text-primary"
+                descriptionColorClass="text-st_lightest"
+                withAnimation={true}
+                backgroundType="paths"
+                contentBgOpacity={0.7}
+                glowColor="primary_light"
+                glowSize="120px"
             />
 
             {/* Services Overview */}
@@ -24,46 +43,22 @@ export default function WebDevelopmentComponentServer() {
                     <div className="max-w-6xl mx-auto">
                         <h2 className="text-3xl font-bold mb-12 text-center text-primary_light">Our Web Development Services</h2>
 
-                        <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
-                            {/* Service 1 */}
-                            <ServiceCard
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center">
+                            <ServicesCard
                                 title="Custom Website Development"
-                                description="We create beautiful, responsive websites tailored to your brand and business objectives. Our sites are
-                                    designed with both aesthetics and functionality in mind."
-                                features={[
-                                    'Responsive design for all devices',
-                                    'Search engine optimization (SEO)',
-                                    'Content management systems (CMS)',
-                                    'E-commerce functionality',
-                                    'Accessibility compliance',
-                                ]}
+                                description="We create beautiful, responsive websites tailored to your brand and business objectives. Our sites are designed with both aesthetics and functionality in mind."
+                                link="/contact?service=website"
+                                iconName="Globe"
                             />
 
-                            {/* Service 2 */}
-                            <ServiceCard
+                            <ServicesCard
                                 title="Web Application Development"
                                 description="Transform your business processes with custom web applications designed to streamline operations, improve efficiency, and enhance user experience."
-                                features={[
-                                    'Custom business solutions',
-                                    'Client portals and dashboards',
-                                    'Data visualization tools',
-                                    'API integration',
-                                    'Progressive web apps (PWAs)',
-                                ]}
+                                link="/contact?service=webapp"
+                                iconName="Code"
                             />
 
-                            {/* Service 3 */}
-                            <ServiceCard
-                                title="Website Maintenance & Support"
-                                description="Keep your website secure, up-to-date, and performing optimally with our comprehensive maintenance and support services."
-                                features={[
-                                    'Regular updates and security patches',
-                                    'Performance optimization',
-                                    'Content updates and management',
-                                    'Backup and recovery solutions',
-                                    'Technical support and troubleshooting',
-                                ]}
-                            />
+                            {/* Additional services can be added here */}
                         </div>
                     </div>
                 </div>
