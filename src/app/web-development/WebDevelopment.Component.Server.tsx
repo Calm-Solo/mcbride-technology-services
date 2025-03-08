@@ -7,8 +7,8 @@ export default function WebDevelopmentComponentServer() {
     return (
         <>
             <HeroSection
-                title="Web Development Services"
-                description="We offer professional web development services tailored to your business needs. Choose from our flexible pricing plans below or contact us for a custom quote."
+                title="Website Development"
+                description="Professional web development services fine tuned to your business needs."
                 buttons={[
                     {
                         text: 'Request a Quote',

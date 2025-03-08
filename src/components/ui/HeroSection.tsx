@@ -62,9 +62,10 @@ export interface HeroSectionProps {
     wavySpeed?: 'slow' | 'fast';
     wavyWaveWidth?: number;
     wavyWaveOpacity?: number;
-    contentBgOpacity?: number; // New prop for content background opacity
-    glowColor?: string; // New prop for glow color
-    glowSize?: string; // New prop for glow size
+    wavyVerticalOffset?: number;
+    contentBgOpacity?: number;
+    glowColor?: string;
+    glowSize?: string;
 }
 
 /**
@@ -97,6 +98,7 @@ export default function HeroSection({
     wavySpeed = 'fast', // Default speed for wavy background
     wavyWaveWidth = 50, // Default wave width for wavy background
     wavyWaveOpacity = 0.5, // Default wave opacity for wavy background
+    wavyVerticalOffset = 25, // Default vertical offset for wavy background (25%)
     contentBgOpacity = 0.85, // Default opacity for content background
     glowColor = 'primary', // Default glow color
     glowSize = '80px', // Default glow size
@@ -158,6 +160,7 @@ export default function HeroSection({
                     speed={wavySpeed}
                     waveWidth={wavyWaveWidth}
                     waveOpacity={wavyWaveOpacity}
+                    verticalOffset={wavyVerticalOffset}
                     fullHeight={false}
                     colors={[
                         '#22577a', // primary_darkest
@@ -179,19 +182,21 @@ export default function HeroSection({
                         style={{
                             backgroundColor: `rgba(17, 24, 39, ${contentBgOpacity})`, // st_darkest with configurable opacity
                             boxShadow: `0 0 ${glowSize} rgba(var(--color-${glowColor}), 0.15)`,
+                            position: 'relative',
                         }}>
                         {/* Subtle glow overlay */}
                         <div
-                            className="absolute inset-0 rounded-xl opacity-20"
+                            className="absolute inset-0 rounded-xl opacity-20 pointer-events-none"
                             style={{
                                 background: `radial-gradient(circle at center, rgba(var(--color-${glowColor}), 0.3) 0%, rgba(var(--color-${glowColor}), 0) 70%)`,
+                                zIndex: 0,
                             }}></div>
 
                         <motion.h1
                             initial={withAnimation ? { opacity: 0, y: 20 } : false}
                             animate={withAnimation ? { opacity: 1, y: 0 } : false}
                             transition={{ duration: 0.8 }}
-                            className={`text-4xl md:text-5xl font-bold mb-6 ${titleColorClass} ${
+                            className={`relative z-10 text-4xl md:text-5xl font-bold mb-6 ${titleColorClass} ${
                                 withAnimation ? `${titleColorHoverClass} transition-colors` : ''
                             }`}>
                             {title}
@@ -201,7 +206,7 @@ export default function HeroSection({
                             initial={withAnimation ? { opacity: 0, y: 20 } : false}
                             animate={withAnimation ? { opacity: 1, y: 0 } : false}
                             transition={{ delay: 0.2, duration: 0.8 }}
-                            className={`text-xl mb-8 ${descriptionColorClass} max-w-3xl ${centered ? 'mx-auto' : ''} ${
+                            className={`relative z-10 text-xl mb-8 ${descriptionColorClass} max-w-3xl ${centered ? 'mx-auto' : ''} ${
                                 withAnimation ? `${descriptionColorHoverClass} transition-colors` : ''
                             }`}>
                             {description}
@@ -212,7 +217,7 @@ export default function HeroSection({
                                 initial={withAnimation ? { opacity: 0, y: 20 } : false}
                                 animate={withAnimation ? { opacity: 1, y: 0 } : false}
                                 transition={{ delay: 0.4, duration: 0.8 }}
-                                className="flex flex-col sm:flex-row gap-4 justify-center">
+                                className="relative z-20 flex flex-col sm:flex-row gap-4 justify-center">
                                 {buttons.map((button, index) => {
                                     // Determine if this is the primary button (first one or explicitly set)
                                     const isPrimary = button.isPrimary !== undefined ? button.isPrimary : index === 0;
@@ -234,7 +239,7 @@ export default function HeroSection({
 
                                         // Common classes
                                         const commonClasses =
-                                            'px-5 py-2.5 rounded-lg font-medium transition-all duration-300 border flex items-center justify-center';
+                                            'px-5 py-2.5 rounded-lg font-medium transition-all duration-300 border flex items-center justify-center w-full relative z-10';
 
                                         // Primary button specific classes
                                         const primaryClasses = isPrimary
@@ -255,8 +260,8 @@ export default function HeroSection({
                                                 return 'animate-pulse';
                                             case 'slide':
                                                 return button.iconPosition === 'right'
-                                                    ? 'transform transition-transform duration-300 group-hover/button:translate-x-1'
-                                                    : 'transform transition-transform duration-300 group-hover/button:-translate-x-1';
+                                                    ? 'transform transition-transform duration-300 group-hover:translate-x-1'
+                                                    : 'transform transition-transform duration-300 group-hover:-translate-x-1';
                                             default:
                                                 return '';
                                         }
@@ -287,8 +292,12 @@ export default function HeroSection({
                                             transition={{
                                                 delay: 0.4 + index * 0.1 + (button.animation?.delay || 0),
                                                 duration: 0.5,
-                                            }}>
-                                            <Link href={button.link} className={`group/button ${getButtonClasses()}`}>
+                                            }}
+                                            className="w-full sm:w-auto relative z-10">
+                                            <Link
+                                                href={button.link}
+                                                className={`group ${getButtonClasses()}`}
+                                                style={{ position: 'relative', zIndex: 30 }}>
                                                 {iconPosition === 'left' && renderIcon()}
                                                 <span>{button.text}</span>
                                                 {iconPosition === 'right' && renderIcon()}

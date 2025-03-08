@@ -84,6 +84,7 @@ export default function ContactComponent() {
                 wavySpeed="fast"
                 wavyWaveWidth={60}
                 wavyWaveOpacity={0.6}
+                wavyVerticalOffset={25}
             />
 
             {/* Contact Information */}

@@ -14,6 +14,7 @@ export interface WavyBackgroundProps extends React.HTMLAttributes<HTMLDivElement
     speed?: 'slow' | 'fast';
     waveOpacity?: number;
     fullHeight?: boolean;
+    verticalOffset?: number;
 }
 
 export const WavyBackground = ({
@@ -27,6 +28,7 @@ export const WavyBackground = ({
     speed = 'fast',
     waveOpacity = 0.5,
     fullHeight = false,
+    verticalOffset = 0,
     ...props
 }: WavyBackgroundProps) => {
     const noise = createNoise3D();
@@ -96,7 +98,8 @@ export const WavyBackground = ({
             ctx.strokeStyle = waveColors[i % waveColors.length];
             for (x = 0; x < w; x += 5) {
                 const y = noise(x / 800, 0.3 * i, nt) * 100;
-                ctx.lineTo(x, y + h * 0.5); // adjust for height, currently at 50% of the container
+                const yOffset = h * (verticalOffset / 100);
+                ctx.lineTo(x, y + h * 0.5 + yOffset);
             }
             ctx.stroke();
             ctx.closePath();
@@ -136,7 +139,7 @@ export const WavyBackground = ({
                 containerClassName
             )}>
             <canvas
-                className="absolute inset-0 z-0 w-full h-full"
+                className="absolute inset-0 z-0 w-full h-full pointer-events-none"
                 ref={canvasRef}
                 id="canvas"
                 style={{

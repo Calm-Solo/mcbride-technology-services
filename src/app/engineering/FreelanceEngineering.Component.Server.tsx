@@ -7,8 +7,8 @@ export default function FreelanceEngineeringComponentServer() {
     return (
         <>
             <HeroSection
-                title="Freelance Engineering Services"
-                description="Expert software engineering and development services for your specialized technical projects"
+                title="Engineering Services"
+                description="Expert engineering services to bring your ideas to life"
                 buttons={[
                     {
                         text: 'Get a Quote',
@@ -205,7 +205,7 @@ export default function FreelanceEngineeringComponentServer() {
                 <div className="container mx-auto px-4 text-center">
                     <h2 className="text-3xl font-bold mb-4 text-st_darkest">Ready to discuss your project?</h2>
                     <p className="text-st_darkest text-lg mb-8 max-w-2xl mx-auto">
-                        Contact us today to discuss how our freelance engineering services can help bring your technical projects to life.
+                        Contact us today to discuss how our engineering services can help bring your technical projects to life.
                     </p>
                     <a
                         href="/contact"
