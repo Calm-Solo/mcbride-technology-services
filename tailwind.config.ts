@@ -84,12 +84,17 @@ const config: Config = {
                         opacity: '0',
                     },
                 },
+                marquee: {
+                    '0%': { transform: 'translateX(0)' },
+                    '100%': { transform: 'translateX(calc(-100% - var(--gap)))' },
+                },
             },
             animation: {
                 fadeIn: 'fadeIn 1s forwards',
                 'accordion-down': 'accordion-down 0.2s ease-out',
                 'accordion-up': 'accordion-up 0.2s ease-out',
                 'meteor-effect': 'meteor 5s linear infinite',
+                marquee: 'marquee var(--duration) linear infinite',
             },
             borderRadius: {
                 '6xl': '3rem',
@@ -101,6 +106,9 @@ const config: Config = {
             rotate: {
                 'y-8': 'rotateY(8deg)',
                 'y-minus-8': 'rotateY(-8deg)',
+            },
+            maxWidth: {
+                container: '1200px',
             },
         },
     },

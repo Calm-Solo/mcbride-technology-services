@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import HeroSection from '@/components/ui/HeroSection';
 import ServicesCard from '@/components/ui/services-card';
+import { TestimonialsSection } from '@/components/ui/testimonials-with-marquee';
+import { TESTIMONIALS } from '@/lib/constants/Testimonials.Constants';
 import { Mail } from 'lucide-react';
 import { MarkerLocation } from '@/components/ui/globe-background';
 
@@ -137,6 +139,14 @@ export default function HomeComponentServer() {
                     </div>
                 </div>
             </section>
+
+            {/* Testimonials Section */}
+            <TestimonialsSection
+                title="Trusted by Businesses Worldwide"
+                description="See what our clients have to say about our IT services and solutions"
+                testimonials={TESTIMONIALS}
+                className="bg-st_darkest"
+            />
 
             {/* Call to Action Section */}
             <section className="bg-primary_darkest py-16">
