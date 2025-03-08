@@ -12,6 +12,7 @@ import { WavyBackground } from './wavy-background';
 import { motion } from 'framer-motion';
 import { ArrowRight, Mail, Info, FileCode, ChevronDown, Phone } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import { MarkerLocation } from './globe-background';
 
 // Dynamically import the ScrollLink component with no SSR
 const ScrollLink = dynamic(() => import('./ScrollLink'), { ssr: false });
@@ -57,6 +58,8 @@ export interface HeroSectionProps {
     particleColor?: string;
     particleCount?: number;
     globeDark?: number;
+    globeVerticalOffset?: number;
+    locations?: MarkerLocation[];
     gradientStartingGap?: number;
     gradientBreathing?: boolean;
     gradientAnimationSpeed?: number;
@@ -93,6 +96,8 @@ export default function HeroSection({
     particleColor = 'rgba(87, 204, 153, 0.6)', // Default to semi-transparent primary color
     particleCount = 80, // Default particle count
     globeDark = 0, // Default globe dark setting
+    globeVerticalOffset = 0, // Default to centered (0%)
+    locations, // Locations for globe markers
     gradientStartingGap = 125, // Default starting gap for gradient
     gradientBreathing = true, // Default breathing animation for gradient
     gradientAnimationSpeed = 0.02, // Default animation speed for gradient
@@ -148,7 +153,7 @@ export default function HeroSection({
             {backgroundType === 'magnetLines' && <MagnetLinesBackground lineColor={magnetLinesColor} />}
             {backgroundType === 'fluid-swirl' && <FluidSwirl color={fluidSwirlColor} />}
             {backgroundType === 'particles' && <ParticlesBackground particleColor={particleColor} particleCount={particleCount} />}
-            {backgroundType === 'globe' && <GlobeBackground dark={globeDark} />}
+            {backgroundType === 'globe' && <GlobeBackground dark={globeDark} verticalOffset={globeVerticalOffset} locations={locations} />}
             {backgroundType === 'animated-gradient' && (
                 <AnimatedGradientBackground
                     startingGap={gradientStartingGap}
