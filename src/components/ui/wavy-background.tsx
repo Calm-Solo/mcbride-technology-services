@@ -15,6 +15,7 @@ export interface WavyBackgroundProps extends React.HTMLAttributes<HTMLDivElement
     waveOpacity?: number;
     fullHeight?: boolean;
     verticalOffset?: number;
+    quality?: 'low' | 'medium' | 'high';
 }
 
 export const WavyBackground = ({
@@ -29,12 +30,16 @@ export const WavyBackground = ({
     waveOpacity = 0.5,
     fullHeight = false,
     verticalOffset = 0,
+    quality = 'medium',
     ...props
 }: WavyBackgroundProps) => {
     const noise = createNoise3D();
     let w: number, h: number, nt: number, i: number, x: number, ctx: CanvasRenderingContext2D | null, canvas: HTMLCanvasElement | null;
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const animationRef = useRef<number | null>(null);
+    const [isVisible, setIsVisible] = useState(true);
+
     const getSpeed = () => {
         switch (speed) {
             case 'slow':
@@ -46,17 +51,25 @@ export const WavyBackground = ({
         }
     };
 
+    const getStepSize = () => {
+        switch (quality) {
+            case 'low':
+                return 10;
+            case 'high':
+                return 3;
+            default:
+                return 5;
+        }
+    };
+
     const updateCanvasSize = () => {
         if (!ctx || !canvas || !containerRef.current) return;
 
-        // Get the actual height of the parent container
         const containerHeight = containerRef.current.offsetHeight;
 
-        // Set canvas dimensions to match parent container
         w = ctx.canvas.width = window.innerWidth;
         h = ctx.canvas.height = containerHeight;
 
-        // Apply blur filter
         ctx.filter = `blur(${blur}px)`;
     };
 
@@ -64,23 +77,32 @@ export const WavyBackground = ({
         canvas = canvasRef.current;
         if (!canvas || !containerRef.current) return;
 
-        const context = canvas.getContext('2d');
+        const context = canvas.getContext('2d', { alpha: false });
         if (!context) return;
 
         ctx = context;
 
-        // Initialize canvas size
         updateCanvasSize();
 
         nt = 0;
 
-        // Set up resize handler
         window.addEventListener('resize', updateCanvasSize);
 
+        startAnimation();
+    };
+
+    const startAnimation = () => {
+        if (!isVisible) return;
         render();
     };
 
-    // Default colors using our theme's primary colors
+    const stopAnimation = () => {
+        if (animationRef.current) {
+            cancelAnimationFrame(animationRef.current);
+            animationRef.current = null;
+        }
+    };
+
     const waveColors = colors ?? [
         '#22577a', // primary_darkest
         '#38a3a5', // primary_dark
@@ -92,11 +114,14 @@ export const WavyBackground = ({
     const drawWave = (n: number) => {
         if (!ctx) return;
         nt += getSpeed();
+        const stepSize = getStepSize();
+
         for (i = 0; i < n; i++) {
             ctx.beginPath();
             ctx.lineWidth = waveWidth || 50;
             ctx.strokeStyle = waveColors[i % waveColors.length];
-            for (x = 0; x < w; x += 5) {
+
+            for (x = 0; x < w; x += stepSize) {
                 const y = noise(x / 800, 0.3 * i, nt) * 100;
                 const yOffset = h * (verticalOffset / 100);
                 ctx.lineTo(x, y + h * 0.5 + yOffset);
@@ -106,27 +131,46 @@ export const WavyBackground = ({
         }
     };
 
-    let animationId: number;
     const render = () => {
-        if (!ctx) return;
-        ctx.fillStyle = backgroundFill || '#111827'; // st_darkest as default background
+        if (!ctx || !isVisible) return;
+
+        ctx.fillStyle = backgroundFill || '#111827';
         ctx.globalAlpha = waveOpacity || 0.5;
         ctx.fillRect(0, 0, w, h);
         drawWave(5);
-        animationId = requestAnimationFrame(render);
+
+        animationRef.current = requestAnimationFrame(render);
     };
 
     useEffect(() => {
-        init();
+        const handleVisibilityChange = () => {
+            if (document.hidden) {
+                setIsVisible(false);
+                stopAnimation();
+            } else {
+                setIsVisible(true);
+                startAnimation();
+            }
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
         return () => {
-            cancelAnimationFrame(animationId);
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+    }, []);
+
+    useEffect(() => {
+        init();
+
+        return () => {
+            stopAnimation();
             window.removeEventListener('resize', updateCanvasSize);
         };
     }, []);
 
     const [isSafari, setIsSafari] = useState(false);
     useEffect(() => {
-        // Support for Safari
         setIsSafari(typeof window !== 'undefined' && navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome'));
     }, []);
 

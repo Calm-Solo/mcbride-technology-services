@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
 import { sendContactFormEmail } from './actions';
-import HeroSection from '@/components/ui/HeroSection';
+import ContactComponentServer from './Contact.Component.Server';
 
 type ContactFormData = {
     name: string;
@@ -49,43 +49,8 @@ export default function ContactComponent() {
 
     return (
         <div className="bg-st_darkest text-st_white">
-            {/* Hero Section with Wavy Background */}
-            <HeroSection
-                title="Contact Us"
-                description="We're here to help with all your technology needs. Reach out to us today."
-                buttons={[
-                    {
-                        text: 'Call Us',
-                        link: 'tel:9162697703',
-                        iconName: 'Phone',
-                        iconPosition: 'left',
-                        bgColor: 'primary_dark',
-                        bgHoverColor: 'primary',
-                        textColor: 'st_white',
-                        textHoverColor: 'st_white',
-                    },
-                    {
-                        text: 'Email Us',
-                        link: 'mailto:mdrservices916@gmail.com',
-                        iconName: 'Mail',
-                        iconPosition: 'left',
-                        bgColor: 'transparent',
-                        bgHoverColor: 'primary',
-                        textColor: 'primary_light',
-                        textHoverColor: 'st_white',
-                        borderColor: 'primary_light',
-                    },
-                ]}
-                backgroundType="wavy"
-                contentBgOpacity={0.7}
-                glowColor="primary"
-                glowSize="100px"
-                wavyBlur={15}
-                wavySpeed="fast"
-                wavyWaveWidth={60}
-                wavyWaveOpacity={0.6}
-                wavyVerticalOffset={25}
-            />
+            {/* Use the server component for the hero section */}
+            <ContactComponentServer />
 
             {/* Contact Information */}
             <section className="py-12 bg-st">
@@ -265,7 +230,7 @@ export default function ContactComponent() {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className={`bg-primary text-st_white px-8 py-3 rounded-lg flex items-center space-x-2 hover:bg-primary_light transition-colors ${
+                                    className={`text-primary border border-primary px-8 py-3 rounded-lg flex items-center space-x-2 hover:bg-primary hover:text-st_darkest transition-colors ${
                                         isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
                                     }`}>
                                     <Send className="h-5 w-5" />

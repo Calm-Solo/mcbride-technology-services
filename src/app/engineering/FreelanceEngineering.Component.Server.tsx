@@ -54,7 +54,7 @@ export default function FreelanceEngineeringComponentServer() {
             />
 
             {/* Services Overview */}
-            <section className="bg-st_dark py-16">
+            <section id="services" className="bg-st_dark py-16">
                 <div className="container mx-auto px-4">
                     <div className="max-w-6xl mx-auto">
                         <h2 className="text-3xl font-bold mb-12 text-center text-primary_light">Our Engineering Services</h2>

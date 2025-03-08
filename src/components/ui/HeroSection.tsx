@@ -11,6 +11,10 @@ import AnimatedGradientBackground from './animated-gradient-background';
 import { WavyBackground } from './wavy-background';
 import { motion } from 'framer-motion';
 import { ArrowRight, Mail, Info, FileCode, ChevronDown, Phone } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+// Dynamically import the ScrollLink component with no SSR
+const ScrollLink = dynamic(() => import('./ScrollLink'), { ssr: false });
 
 // Define the available icon names we support
 export type IconName = 'ArrowRight' | 'Mail' | 'Info' | 'FileCode' | 'ChevronDown' | 'Phone';
@@ -103,6 +107,15 @@ export default function HeroSection({
     glowColor = 'primary', // Default glow color
     glowSize = '80px', // Default glow size
 }: HeroSectionProps) {
+    // Add a key to force remount when navigating between pages
+    const [key, setKey] = React.useState(Date.now());
+
+    // Use useEffect to update the key when the component mounts
+    React.useEffect(() => {
+        // Update the key to force a remount
+        setKey(Date.now());
+    }, []);
+
     // Function to get the icon component based on name
     const getIconComponent = (iconName: IconName) => {
         switch (iconName) {
@@ -193,6 +206,7 @@ export default function HeroSection({
                             }}></div>
 
                         <motion.h1
+                            key={`title-${key}`}
                             initial={withAnimation ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
@@ -203,6 +217,7 @@ export default function HeroSection({
                         </motion.h1>
 
                         <motion.p
+                            key={`description-${key}`}
                             initial={withAnimation ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2, duration: 0.8 }}
@@ -214,6 +229,7 @@ export default function HeroSection({
 
                         {buttons.length > 0 && (
                             <motion.div
+                                key={`buttons-${key}`}
                                 initial={withAnimation ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4, duration: 0.8 }}
@@ -241,13 +257,10 @@ export default function HeroSection({
                                         const commonClasses =
                                             'px-5 py-2.5 rounded-lg font-medium transition-all duration-300 border flex items-center justify-center w-full relative z-10';
 
-                                        // Hover effect classes
-                                        const hoverEffectClasses = 'hover:-translate-y-0.5 hover:scale-105 transform hover:shadow-md';
-
                                         // Primary button specific classes
                                         const primaryClasses = isPrimary
-                                            ? 'shadow-md hover:shadow-lg hover:-translate-y-0.5 hover:scale-105 transform'
-                                            : hoverEffectClasses;
+                                            ? 'shadow-md hover:shadow-lg hover:-translate-y-0.5 transform'
+                                            : '';
 
                                         return `${textColorClass} ${textHoverColorClass} ${bgColorClass} ${bgHoverColorClass} ${borderColorClass} ${commonClasses} ${primaryClasses}`;
                                     };
@@ -263,8 +276,8 @@ export default function HeroSection({
                                                 return 'animate-pulse';
                                             case 'slide':
                                                 return button.iconPosition === 'right'
-                                                    ? 'transform transition-transform duration-300 ease-in-out group-hover:translate-x-1'
-                                                    : 'transform transition-transform duration-300 ease-in-out group-hover:-translate-x-1';
+                                                    ? 'transform transition-transform duration-300 group-hover:translate-x-1'
+                                                    : 'transform transition-transform duration-300 group-hover:-translate-x-1';
                                             default:
                                                 return '';
                                         }
@@ -289,7 +302,7 @@ export default function HeroSection({
 
                                     return (
                                         <motion.div
-                                            key={index}
+                                            key={`button-${index}-${key}`}
                                             initial={withAnimation ? { opacity: 0, y: 10 } : { opacity: 1, y: 0 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{
@@ -297,28 +310,54 @@ export default function HeroSection({
                                                 duration: 0.5,
                                             }}
                                             className="w-full sm:w-auto relative z-10">
-                                            <Link
-                                                href={button.link}
-                                                className={`group ${getButtonClasses()}`}
-                                                style={{ position: 'relative', zIndex: 30 }}>
-                                                {iconPosition === 'left' && renderIcon()}
-                                                <span className="relative z-10">{button.text}</span>
-                                                {iconPosition === 'right' && renderIcon()}
+                                            {button.link.startsWith('#') ? (
+                                                <ScrollLink
+                                                    href={button.link}
+                                                    className={`group ${getButtonClasses()}`}
+                                                    offset={80} // Add some offset to account for fixed headers
+                                                >
+                                                    {iconPosition === 'left' && renderIcon()}
+                                                    <span className="relative z-10">{button.text}</span>
+                                                    {iconPosition === 'right' && renderIcon()}
 
-                                                {/* Hover effect overlay */}
-                                                <span
-                                                    className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-10 transition-opacity duration-300 bg-white"
-                                                    style={{ zIndex: 5 }}></span>
+                                                    {/* Hover effect overlay */}
+                                                    <span
+                                                        className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-10 transition-opacity duration-300 bg-white"
+                                                        style={{ zIndex: 5 }}></span>
 
-                                                {/* Glow effect */}
-                                                <span
-                                                    className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-70 transition-all duration-300 blur-md"
-                                                    style={{
-                                                        zIndex: 1,
-                                                        background: `radial-gradient(circle at center, rgba(var(--color-${button.bgColor || 'primary'}), 0.3) 0%, rgba(var(--color-${button.bgColor || 'primary'}), 0) 70%)`,
-                                                        transform: 'scale(1.1)',
-                                                    }}></span>
-                                            </Link>
+                                                    {/* Glow effect */}
+                                                    <span
+                                                        className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-70 transition-all duration-300 blur-md"
+                                                        style={{
+                                                            zIndex: 1,
+                                                            background: `radial-gradient(circle at center, rgba(var(--color-${button.bgColor || 'primary'}), 0.3) 0%, rgba(var(--color-${button.bgColor || 'primary'}), 0) 70%)`,
+                                                            transform: 'scale(1.1)',
+                                                        }}></span>
+                                                </ScrollLink>
+                                            ) : (
+                                                <Link
+                                                    href={button.link}
+                                                    className={`group ${getButtonClasses()}`}
+                                                    style={{ position: 'relative', zIndex: 30 }}>
+                                                    {iconPosition === 'left' && renderIcon()}
+                                                    <span className="relative z-10">{button.text}</span>
+                                                    {iconPosition === 'right' && renderIcon()}
+
+                                                    {/* Hover effect overlay */}
+                                                    <span
+                                                        className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-10 transition-opacity duration-300 bg-white"
+                                                        style={{ zIndex: 5 }}></span>
+
+                                                    {/* Glow effect */}
+                                                    <span
+                                                        className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-70 transition-all duration-300 blur-md"
+                                                        style={{
+                                                            zIndex: 1,
+                                                            background: `radial-gradient(circle at center, rgba(var(--color-${button.bgColor || 'primary'}), 0.3) 0%, rgba(var(--color-${button.bgColor || 'primary'}), 0) 70%)`,
+                                                            transform: 'scale(1.1)',
+                                                        }}></span>
+                                                </Link>
+                                            )}
                                         </motion.div>
                                     );
                                 })}
