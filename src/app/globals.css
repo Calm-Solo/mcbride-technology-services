@@ -10,6 +10,13 @@
     --background: #111827; /* st_darkest */
     --foreground: #f9fafb; /* st_white */
     --radius: 0.5rem;
+    /* Color variables for glow effects */
+    --color-primary: 87, 204, 153; /* RGB values for #57cc99 (Emerald) */
+    --color-primary_light: 128, 237, 153; /* RGB values for #80ed99 (Aquamarine) */
+    --color-primary_dark: 56, 163, 165; /* RGB values for #38a3a5 (Verdigris) */
+    --color-primary_darkest: 34, 87, 122; /* RGB values for #22577a (Lapis Lazuli) */
+    --color-st_darkest: 17, 24, 39; /* RGB values for #111827 (Dark slate) */
+    --color-st_white: 249, 250, 251; /* RGB values for #F9FAFB (Off-white) */
 }
 
 @media (prefers-color-scheme: dark) {

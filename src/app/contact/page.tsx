@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import PageLayout from '@/components/layout/PageLayout';
-import ContactComponentServer from './Contact.Component.Server';
+import ContactComponent from './Contact.Client.Component';
 
 export const metadata: Metadata = {
     title: 'Contact Us | McBride Technology Services',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
     return (
         <PageLayout page="contact">
-            <ContactComponentServer />
+            <ContactComponent />
         </PageLayout>
     );
 }
