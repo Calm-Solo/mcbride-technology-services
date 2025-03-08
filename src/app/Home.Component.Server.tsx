@@ -75,7 +75,7 @@ export default function HomeComponentServer() {
                         <ServicesCard
                             title="Engineering"
                             description="Expert engineering and development services for specialized technical projects and unique business needs."
-                            link="/freelance-engineering"
+                            link="/engineering"
                             iconName="Code"
                         />
                     </div>

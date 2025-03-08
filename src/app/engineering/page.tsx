@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 
 export default function FreelanceEngineering() {
     return (
-        <PageLayout page="freelance-engineering">
+        <PageLayout page="engineering">
             <FreelanceEngineeringComponentServer />
         </PageLayout>
     );

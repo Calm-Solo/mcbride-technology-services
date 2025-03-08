@@ -193,8 +193,8 @@ export default function HeroSection({
                             }}></div>
 
                         <motion.h1
-                            initial={withAnimation ? { opacity: 0, y: 20 } : false}
-                            animate={withAnimation ? { opacity: 1, y: 0 } : false}
+                            initial={withAnimation ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
+                            animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
                             className={`relative z-10 text-4xl md:text-5xl font-bold mb-6 ${titleColorClass} ${
                                 withAnimation ? `${titleColorHoverClass} transition-colors` : ''
@@ -203,8 +203,8 @@ export default function HeroSection({
                         </motion.h1>
 
                         <motion.p
-                            initial={withAnimation ? { opacity: 0, y: 20 } : false}
-                            animate={withAnimation ? { opacity: 1, y: 0 } : false}
+                            initial={withAnimation ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
+                            animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2, duration: 0.8 }}
                             className={`relative z-10 text-xl mb-8 ${descriptionColorClass} max-w-3xl ${centered ? 'mx-auto' : ''} ${
                                 withAnimation ? `${descriptionColorHoverClass} transition-colors` : ''
@@ -214,8 +214,8 @@ export default function HeroSection({
 
                         {buttons.length > 0 && (
                             <motion.div
-                                initial={withAnimation ? { opacity: 0, y: 20 } : false}
-                                animate={withAnimation ? { opacity: 1, y: 0 } : false}
+                                initial={withAnimation ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
+                                animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4, duration: 0.8 }}
                                 className="relative z-20 flex flex-col sm:flex-row gap-4 justify-center">
                                 {buttons.map((button, index) => {
@@ -241,10 +241,13 @@ export default function HeroSection({
                                         const commonClasses =
                                             'px-5 py-2.5 rounded-lg font-medium transition-all duration-300 border flex items-center justify-center w-full relative z-10';
 
+                                        // Hover effect classes
+                                        const hoverEffectClasses = 'hover:-translate-y-0.5 hover:scale-105 transform hover:shadow-md';
+
                                         // Primary button specific classes
                                         const primaryClasses = isPrimary
-                                            ? 'shadow-md hover:shadow-lg hover:-translate-y-0.5 transform'
-                                            : '';
+                                            ? 'shadow-md hover:shadow-lg hover:-translate-y-0.5 hover:scale-105 transform'
+                                            : hoverEffectClasses;
 
                                         return `${textColorClass} ${textHoverColorClass} ${bgColorClass} ${bgHoverColorClass} ${borderColorClass} ${commonClasses} ${primaryClasses}`;
                                     };
@@ -260,8 +263,8 @@ export default function HeroSection({
                                                 return 'animate-pulse';
                                             case 'slide':
                                                 return button.iconPosition === 'right'
-                                                    ? 'transform transition-transform duration-300 group-hover:translate-x-1'
-                                                    : 'transform transition-transform duration-300 group-hover:-translate-x-1';
+                                                    ? 'transform transition-transform duration-300 ease-in-out group-hover:translate-x-1'
+                                                    : 'transform transition-transform duration-300 ease-in-out group-hover:-translate-x-1';
                                             default:
                                                 return '';
                                         }
@@ -287,8 +290,8 @@ export default function HeroSection({
                                     return (
                                         <motion.div
                                             key={index}
-                                            initial={withAnimation ? { opacity: 0, y: 10 } : false}
-                                            animate={withAnimation ? { opacity: 1, y: 0 } : false}
+                                            initial={withAnimation ? { opacity: 0, y: 10 } : { opacity: 1, y: 0 }}
+                                            animate={{ opacity: 1, y: 0 }}
                                             transition={{
                                                 delay: 0.4 + index * 0.1 + (button.animation?.delay || 0),
                                                 duration: 0.5,
@@ -299,8 +302,22 @@ export default function HeroSection({
                                                 className={`group ${getButtonClasses()}`}
                                                 style={{ position: 'relative', zIndex: 30 }}>
                                                 {iconPosition === 'left' && renderIcon()}
-                                                <span>{button.text}</span>
+                                                <span className="relative z-10">{button.text}</span>
                                                 {iconPosition === 'right' && renderIcon()}
+
+                                                {/* Hover effect overlay */}
+                                                <span
+                                                    className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-10 transition-opacity duration-300 bg-white"
+                                                    style={{ zIndex: 5 }}></span>
+
+                                                {/* Glow effect */}
+                                                <span
+                                                    className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-70 transition-all duration-300 blur-md"
+                                                    style={{
+                                                        zIndex: 1,
+                                                        background: `radial-gradient(circle at center, rgba(var(--color-${button.bgColor || 'primary'}), 0.3) 0%, rgba(var(--color-${button.bgColor || 'primary'}), 0) 70%)`,
+                                                        transform: 'scale(1.1)',
+                                                    }}></span>
                                             </Link>
                                         </motion.div>
                                     );
