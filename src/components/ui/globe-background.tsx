@@ -24,16 +24,16 @@ const ST_LIGHTEST = '#6B7280'; // Lightest slate
 
 // Default marker locations (latitude, longitude)
 const DEFAULT_LOCATIONS: MarkerLocation[] = [
-    { location: [37.7749, -122.4194] as [number, number], name: 'San Francisco', pulsing: true }, // San Francisco
-    { location: [40.7128, -74.006] as [number, number], name: 'New York', pulsing: true }, // New York
-    { location: [51.5074, -0.1278] as [number, number], name: 'London', pulsing: true }, // London
-    { location: [35.6762, 139.6503] as [number, number], name: 'Tokyo', pulsing: true }, // Tokyo
-    { location: [-33.8688, 151.2093] as [number, number], name: 'Sydney', pulsing: true }, // Sydney
-    { location: [19.4326, -99.1332] as [number, number], name: 'Mexico City', pulsing: true }, // Mexico City
-    { location: [-23.5505, -46.6333] as [number, number], name: 'São Paulo', pulsing: true }, // São Paulo
-    { location: [55.7558, 37.6173] as [number, number], name: 'Moscow', pulsing: true }, // Moscow
-    { location: [28.6139, 77.209] as [number, number], name: 'New Delhi', pulsing: true }, // New Delhi
-    { location: [30.0444, 31.2357] as [number, number], name: 'Cairo', pulsing: true }, // Cairo
+    { location: [37.7749, -122.4194] as [number, number], name: 'San Francisco' }, // San Francisco
+    { location: [40.7128, -74.006] as [number, number], name: 'New York' }, // New York
+    { location: [51.5074, -0.1278] as [number, number], name: 'London' }, // London
+    { location: [35.6762, 139.6503] as [number, number], name: 'Tokyo' }, // Tokyo
+    { location: [-33.8688, 151.2093] as [number, number], name: 'Sydney' }, // Sydney
+    { location: [19.4326, -99.1332] as [number, number], name: 'Mexico City' }, // Mexico City
+    { location: [-23.5505, -46.6333] as [number, number], name: 'São Paulo' }, // São Paulo
+    { location: [55.7558, 37.6173] as [number, number], name: 'Moscow' }, // Moscow
+    { location: [28.6139, 77.209] as [number, number], name: 'New Delhi' }, // New Delhi
+    { location: [30.0444, 31.2357] as [number, number], name: 'Cairo' }, // Cairo
 ];
 
 export interface MarkerLocation {
@@ -90,9 +90,6 @@ export function GlobeBackground({
     const pointerInteracting = useRef<number | null>(null);
     const pointerInteractionMovement = useRef(0);
     const [r, setR] = useState(0);
-    const [pulsePhases, setPulsePhases] = useState<number[]>(locations.map(() => Math.random() * Math.PI * 2));
-    const overlayCanvasRef = useRef<HTMLCanvasElement>(null);
-    const animationFrameRef = useRef<number | null>(null);
 
     const updatePointerInteraction = (value: number | null) => {
         pointerInteracting.current = value;
@@ -123,102 +120,7 @@ export function GlobeBackground({
         if (canvasRef.current && containerRef.current) {
             width = canvasRef.current.offsetWidth;
             height = canvasRef.current.offsetHeight;
-
-            // Also resize the overlay canvas
-            if (overlayCanvasRef.current) {
-                overlayCanvasRef.current.width = width;
-                overlayCanvasRef.current.height = height;
-            }
         }
-    };
-
-    // Function to convert lat/long to 3D coordinates on the globe
-    const latLongTo3d = (lat: number, long: number, radius: number) => {
-        const phi = (90 - lat) * (Math.PI / 180);
-        const theta = (long + 180) * (Math.PI / 180);
-
-        const x = -(radius * Math.sin(phi) * Math.cos(theta));
-        const z = radius * Math.sin(phi) * Math.sin(theta);
-        const y = radius * Math.cos(phi);
-
-        return { x, y, z };
-    };
-
-    // Function to project 3D coordinates to 2D screen coordinates
-    const project3dTo2d = (x: number, y: number, z: number) => {
-        // Simple perspective projection
-        const scale = 400 / (400 - z);
-        const screenX = width / 2 + x * scale;
-        const screenY = height / 2 + y * scale;
-
-        return { x: screenX, y: screenY, scale };
-    };
-
-    // Function to draw pulsing effects on the overlay canvas
-    const drawPulsingEffects = () => {
-        if (!overlayCanvasRef.current) return;
-
-        const ctx = overlayCanvasRef.current.getContext('2d');
-        if (!ctx) return;
-
-        // Clear the canvas
-        ctx.clearRect(0, 0, width, height);
-
-        // Update pulse phases
-        const newPhases = [...pulsePhases];
-
-        // Draw pulsing effects for each marker
-        locations.forEach((marker, index) => {
-            // Skip if marker doesn't want pulsing effect
-            if (marker.pulsing === false) return;
-
-            // Get 3D coordinates
-            const coords3d = latLongTo3d(marker.location[0], marker.location[1], 180);
-
-            // Rotate based on current phi
-            const rotatedX = coords3d.x * Math.cos(phi + r) - coords3d.z * Math.sin(phi + r);
-            const rotatedZ = coords3d.x * Math.sin(phi + r) + coords3d.z * Math.cos(phi + r);
-
-            // Project to 2D
-            const projected = project3dTo2d(rotatedX, coords3d.y, rotatedZ);
-
-            // Only draw if the point is on the front half of the globe (z > 0)
-            if (rotatedZ < 0) {
-                // Update the phase
-                newPhases[index] = (newPhases[index] + 0.03) % (Math.PI * 2);
-
-                // Calculate pulse size based on phase
-                const pulseSize = Math.sin(newPhases[index]) * 0.5 + 0.5; // Range from 0 to 1
-                const maxRadius = 20;
-                const currentRadius = 5 + pulseSize * maxRadius;
-
-                // Draw the pulse
-                const markerColor = marker.color ? hexToRgb(marker.color) : hexToRgb(PRIMARY);
-
-                // Outer pulse
-                const gradient = ctx.createRadialGradient(projected.x, projected.y, 0, projected.x, projected.y, currentRadius);
-                gradient.addColorStop(0, `rgba(${markerColor[0] * 255}, ${markerColor[1] * 255}, ${markerColor[2] * 255}, 0.8)`);
-                gradient.addColorStop(0.5, `rgba(${markerColor[0] * 255}, ${markerColor[1] * 255}, ${markerColor[2] * 255}, 0.4)`);
-                gradient.addColorStop(1, `rgba(${markerColor[0] * 255}, ${markerColor[1] * 255}, ${markerColor[2] * 255}, 0)`);
-
-                ctx.beginPath();
-                ctx.fillStyle = gradient;
-                ctx.arc(projected.x, projected.y, currentRadius, 0, Math.PI * 2);
-                ctx.fill();
-
-                // Inner dot
-                ctx.beginPath();
-                ctx.fillStyle = `rgba(${markerColor[0] * 255}, ${markerColor[1] * 255}, ${markerColor[2] * 255}, 0.9)`;
-                ctx.arc(projected.x, projected.y, 3, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        });
-
-        // Update phases
-        setPulsePhases(newPhases);
-
-        // Request next frame
-        animationFrameRef.current = requestAnimationFrame(drawPulsingEffects);
     };
 
     useEffect(() => {
@@ -264,24 +166,15 @@ export function GlobeBackground({
 
         const globe = createGlobe(canvasRef.current!, config);
 
-        // Start the pulsing animation
-        animationFrameRef.current = requestAnimationFrame(drawPulsingEffects);
-
         setTimeout(() => {
             if (canvasRef.current) {
                 canvasRef.current.style.opacity = '1';
-            }
-            if (overlayCanvasRef.current) {
-                overlayCanvasRef.current.style.opacity = '1';
             }
         });
 
         return () => {
             window.removeEventListener('resize', onResize);
             globe.destroy();
-            if (animationFrameRef.current) {
-                cancelAnimationFrame(animationFrameRef.current);
-            }
         };
     }, [markerColor, baseColor, glowColor, dark, onRender, useThemeColors, locations]);
 
@@ -300,10 +193,6 @@ export function GlobeBackground({
                     onPointerOut={() => updatePointerInteraction(null)}
                     onMouseMove={(e) => updateMovement(e.clientX)}
                     onTouchMove={(e) => e.touches[0] && updateMovement(e.touches[0].clientX)}
-                />
-                <canvas
-                    className="absolute inset-0 w-full h-full opacity-0 transition-opacity duration-500 pointer-events-none"
-                    ref={overlayCanvasRef}
                 />
             </div>
         </div>
