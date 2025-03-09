@@ -5,6 +5,18 @@ import PortfolioGrid from '@/components/ui/portfolio/PortfolioGrid';
 import PortfolioSpotlight from '@/components/ui/portfolio/PortfolioSpotlight';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import {
+    REACT_TAG,
+    NEXT_JS_TAG,
+    TAILWIND_CSS_TAG,
+    TYPE_SCRIPT_TAG,
+    SHADCN_UI_TAG,
+    POSTGRES_TAG,
+    DRIZZLE_TAG,
+    FRAMER_MOTION_TAG,
+    SELENIUM_TAG,
+    PYTHON_TAG,
+} from '@/lib/constants/PortfolioTags.Constants';
 
 export default function PortfolioComponentServer() {
     // Get the first portfolio item for the spotlight
@@ -65,13 +77,29 @@ export default function PortfolioComponentServer() {
             <div id="portfolio" className="w-full py-16 bg-st_darkest md:py-20">
                 <div className="w-full">
                     <div className="mb-12 text-center px-8">
-                        <h2 className="mb-4 text-3xl font-bold text-primary md:text-4xl">Our Projects</h2>
+                        <h2 className="mb-4 text-3xl font-bold bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent md:text-4xl">
+                            Our Projects
+                        </h2>
                         <p className="mx-auto max-w-2xl text-st_lightest">
                             Browse through our diverse portfolio of successful projects across multiple industries and technologies.
                         </p>
                     </div>
                     <div className="w-full px-8">
-                        <PortfolioGrid items={PORTFOLIO_ITEMS} />
+                        <PortfolioGrid
+                            items={PORTFOLIO_ITEMS}
+                            tags={[
+                                REACT_TAG,
+                                NEXT_JS_TAG,
+                                TAILWIND_CSS_TAG,
+                                TYPE_SCRIPT_TAG,
+                                SHADCN_UI_TAG,
+                                POSTGRES_TAG,
+                                DRIZZLE_TAG,
+                                FRAMER_MOTION_TAG,
+                                SELENIUM_TAG,
+                                PYTHON_TAG,
+                            ]}
+                        />
                     </div>
                 </div>
             </div>

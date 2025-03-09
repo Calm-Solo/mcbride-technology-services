@@ -55,16 +55,26 @@ export default function PortfolioCard({ item, index }: PortfolioCardProps) {
 }
 
 function TagBadge({ tag }: { tag: PortfolioItemTag }) {
+    // Extract the base classes without the hover: prefix
+    const bgColor = tag.bgColor;
+    const textColor = tag.textColor;
+    const iconColor = tag.iconColor;
+
+    // Extract hover classes - these already include the hover: prefix
+    const bgHoverClass = tag.bgHoverColor;
+    const textHoverClass = tag.textHoverColor;
+    const iconHoverClass = tag.iconHoverColor.replace('group-hover:', ''); // Remove group-hover: prefix if present
+
     return (
         <div
             className={cn(
-                'flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors',
-                tag.bgColor,
-                tag.textColor,
-                `hover:${tag.bgHoverColor}`,
-                `hover:${tag.textHoverColor}`
+                'group flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-all duration-200',
+                bgColor,
+                textColor,
+                bgHoverClass,
+                textHoverClass
             )}>
-            <span className="size-3.5">{tag.icon}</span>
+            <span className={cn('size-3.5 transition-colors duration-200', iconColor, `group-hover:${iconHoverClass}`)}>{tag.icon}</span>
             <span>{tag.name}</span>
         </div>
     );

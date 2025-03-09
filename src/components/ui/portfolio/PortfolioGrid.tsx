@@ -12,17 +12,17 @@ interface PortfolioGridProps {
 }
 
 export default function PortfolioGrid({ items, tags = [] }: PortfolioGridProps) {
-    const [selectedTag, setSelectedTag] = useState<string | null>(null);
+    const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [filteredItems, setFilteredItems] = useState<PortfolioItem[]>(items);
 
-    // Filter items when selected tag changes
+    // Filter items when selected tags change
     useEffect(() => {
-        if (selectedTag) {
-            setFilteredItems(items.filter((item) => item.tags.some((tag) => tag.name === selectedTag)));
+        if (selectedTags.length > 0) {
+            setFilteredItems(items.filter((item) => item.tags.some((tag) => selectedTags.includes(tag.name))));
         } else {
             setFilteredItems(items);
         }
-    }, [selectedTag, items]);
+    }, [selectedTags, items]);
 
     // Get unique tags from items for the filter
     const uniqueTags =
@@ -33,6 +33,17 @@ export default function PortfolioGrid({ items, tags = [] }: PortfolioGridProps) 
                   return foundTag as PortfolioItemTag;
               });
 
+    const handleTagToggle = (tagName: string) => {
+        setSelectedTags((prev) => {
+            // If tag is already selected, remove it
+            if (prev.includes(tagName)) {
+                return prev.filter((t) => t !== tagName);
+            }
+            // Otherwise add it
+            return [...prev, tagName];
+        });
+    };
+
     return (
         <div className="w-full">
             {/* Filter Controls */}
@@ -40,27 +51,64 @@ export default function PortfolioGrid({ items, tags = [] }: PortfolioGridProps) 
                 <div className="mb-8">
                     <div className="flex flex-wrap items-center gap-2 justify-center">
                         <button
-                            onClick={() => setSelectedTag(null)}
+                            onClick={() => setSelectedTags([])}
                             className={cn(
                                 'rounded-full px-4 py-2 text-sm font-medium transition-colors',
-                                selectedTag === null ? 'bg-primary text-white' : 'bg-st_dark text-st_white hover:bg-st_light'
+                                selectedTags.length === 0 ? 'bg-primary text-white' : 'bg-st_dark text-st_white hover:bg-st_light'
                             )}>
                             All
                         </button>
 
-                        {uniqueTags.map((tag, index) => (
-                            <button
-                                key={index}
-                                onClick={() => setSelectedTag(tag.name)}
-                                className={cn(
-                                    'flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-colors',
-                                    selectedTag === tag.name ? [tag.bgColor, tag.textColor] : 'bg-st_dark text-st_white hover:bg-st_light'
-                                )}>
-                                <span className="size-3.5">{tag.icon}</span>
-                                <span>{tag.name}</span>
-                            </button>
-                        ))}
+                        {uniqueTags.map((tag, index) => {
+                            const isSelected = selectedTags.includes(tag.name);
+
+                            // Extract the base classes
+                            const bgColor = isSelected ? tag.bgColor : 'bg-st_dark';
+                            const textColor = isSelected ? tag.textColor : 'text-st_white';
+                            const iconColor = isSelected ? tag.iconColor : 'text-st_white';
+
+                            // Extract hover classes - these already include the hover: prefix
+                            const bgHoverClass = isSelected ? tag.bgHoverColor : 'hover:bg-st_light';
+                            const textHoverClass = isSelected ? tag.textHoverColor : '';
+                            const iconHoverClass = isSelected ? tag.iconHoverColor.replace('group-hover:', '') : '';
+
+                            return (
+                                <button
+                                    key={index}
+                                    onClick={() => handleTagToggle(tag.name)}
+                                    className={cn(
+                                        'group flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200',
+                                        bgColor,
+                                        textColor,
+                                        bgHoverClass,
+                                        textHoverClass
+                                    )}>
+                                    <span
+                                        className={cn(
+                                            'size-3.5 transition-colors duration-200',
+                                            iconColor,
+                                            isSelected ? `group-hover:${iconHoverClass}` : ''
+                                        )}>
+                                        {tag.icon}
+                                    </span>
+                                    <span>{tag.name}</span>
+                                </button>
+                            );
+                        })}
                     </div>
+
+                    {/* Selected tags summary */}
+                    {selectedTags.length > 0 && (
+                        <div className="mt-4 text-center text-sm text-st_light">
+                            <span>Showing projects with: </span>
+                            {selectedTags.map((tag, index) => (
+                                <span key={index} className="font-medium text-primary">
+                                    {tag}
+                                    {index < selectedTags.length - 1 ? ', ' : ''}
+                                </span>
+                            ))}
+                        </div>
+                    )}
                 </div>
             )}
 

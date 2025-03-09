@@ -18,6 +18,8 @@ export interface PortfolioItemTag {
     bgColor: string;
     bgHoverColor: string;
     icon: React.ReactNode;
+    iconColor: string;
+    iconHoverColor: string;
 }
 
 export interface PortfolioItem {

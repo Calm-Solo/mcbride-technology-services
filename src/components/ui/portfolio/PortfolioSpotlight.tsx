@@ -46,18 +46,39 @@ export default function PortfolioSpotlight({ item }: PortfolioSpotlightProps) {
                             <p className="text-st_white mb-6">{item.description}</p>
 
                             <div className="flex flex-wrap gap-2 mb-6">
-                                {item.tags.map((tag, index) => (
-                                    <span
-                                        key={index}
-                                        className={cn(
-                                            'inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium',
-                                            tag.bgColor,
-                                            tag.textColor
-                                        )}>
-                                        <span className="size-3.5">{tag.icon}</span>
-                                        <span>{tag.name}</span>
-                                    </span>
-                                ))}
+                                {item.tags.map((tag, index) => {
+                                    // Extract the base classes without the hover: prefix
+                                    const bgColor = tag.bgColor;
+                                    const textColor = tag.textColor;
+                                    const iconColor = tag.iconColor;
+
+                                    // Extract hover classes - these already include the hover: prefix
+                                    const bgHoverClass = tag.bgHoverColor;
+                                    const textHoverClass = tag.textHoverColor;
+                                    const iconHoverClass = tag.iconHoverColor.replace('group-hover:', ''); // Remove group-hover: prefix if present
+
+                                    return (
+                                        <span
+                                            key={index}
+                                            className={cn(
+                                                'group inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-all duration-200',
+                                                bgColor,
+                                                textColor,
+                                                bgHoverClass,
+                                                textHoverClass
+                                            )}>
+                                            <span
+                                                className={cn(
+                                                    'size-3.5 transition-colors duration-200',
+                                                    iconColor,
+                                                    `group-hover:${iconHoverClass}`
+                                                )}>
+                                                {tag.icon}
+                                            </span>
+                                            <span>{tag.name}</span>
+                                        </span>
+                                    );
+                                })}
                             </div>
 
                             <Link
