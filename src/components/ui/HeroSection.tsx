@@ -252,7 +252,7 @@ export default function HeroSection({
                                         const textHoverColorClass = `hover:text-${button.textHoverColor || (isPrimary ? 'st_darkest' : 'st_white')}`;
 
                                         // Background color classes
-                                        const bgColorClass = button.bgColor ? `bg-${button.bgColor}` : isPrimary ? 'bg-primary' : '';
+                                        const bgColorClass = button.bgColor ? `bg-${button.bgColor}` : isPrimary ? '' : '';
                                         const bgHoverColorClass = `hover:bg-${button.bgHoverColor || (isPrimary ? 'primary_light' : 'primary')}`;
 
                                         // Border color class

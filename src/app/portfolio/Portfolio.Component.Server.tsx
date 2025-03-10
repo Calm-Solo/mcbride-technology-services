@@ -35,6 +35,10 @@ export default function PortfolioComponentServer() {
                             isPrimary: true,
                             iconName: 'ArrowRight',
                             iconPosition: 'right',
+                            textColor: 'primary',
+                            textHoverColor: 'st_darkest',
+                            bgHoverColor: 'primary',
+                            borderColor: 'primary',
                             animation: {
                                 type: 'bounce',
                                 delay: 0.5,
@@ -46,6 +50,10 @@ export default function PortfolioComponentServer() {
                             isPrimary: false,
                             iconName: 'Mail',
                             iconPosition: 'right',
+                            textColor: 'primary',
+                            textHoverColor: 'st_darkest',
+                            bgHoverColor: 'primary',
+                            borderColor: 'primary',
                         },
                     ]}
                     backgroundType="wavy"
