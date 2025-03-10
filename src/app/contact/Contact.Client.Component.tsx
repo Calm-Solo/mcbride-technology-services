@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
 import { sendContactFormEmail } from './actions';
 import ContactComponentServer from './Contact.Component.Server';
-
+import CallToAction from '@/components/ui/CallToAction';
 type ContactFormData = {
     name: string;
     email: string;
@@ -282,6 +282,51 @@ export default function ContactComponent() {
                     </div>
                 </div>
             </section>
+
+            {/* Call to Action to explore services */}
+            <CallToAction
+                title="Explore Our Services"
+                description="Check out our specialized services to learn more about how we can help your business thrive."
+                buttons={[
+                    {
+                        text: 'Web Development',
+                        link: '/web-development',
+                        borderColor: 'primary',
+                        bgColor: 'st_darkest',
+                        bgHoverColor: 'primary',
+                        textColor: 'primary',
+                        textHoverColor: 'st_darkest',
+                        iconName: 'Globe',
+                        iconPosition: 'left',
+                    },
+                    {
+                        text: 'IT Support',
+                        link: '/it-support',
+                        borderColor: 'primary',
+                        bgColor: 'st_darkest',
+                        bgHoverColor: 'primary',
+                        textColor: 'primary',
+                        textHoverColor: 'st_darkest',
+                        iconName: 'Info',
+                        iconPosition: 'left',
+                    },
+                    {
+                        text: 'Engineering',
+                        link: '/engineering',
+                        borderColor: 'primary',
+                        bgColor: 'st_darkest',
+                        bgHoverColor: 'primary',
+                        textColor: 'primary',
+                        textHoverColor: 'st_darkest',
+                        iconName: 'FileCode',
+                        iconPosition: 'left',
+                    },
+                ]}
+                variant="simple"
+                bgColor="bg-st_darkest"
+                textColor="text-st_white"
+                titleColor="text-primary"
+            />
         </div>
     );
 }

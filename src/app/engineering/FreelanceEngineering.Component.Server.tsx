@@ -2,6 +2,7 @@ import React from 'react';
 import HeroSection from '@/components/ui/HeroSection';
 import PriceCard from '@/components/ui/PriceCard';
 import ServiceCard from '@/components/ui/ServiceCard';
+import CallToAction from '@/components/ui/CallToAction';
 
 export default function FreelanceEngineeringComponentServer() {
     return (
@@ -201,19 +202,23 @@ export default function FreelanceEngineeringComponentServer() {
             </section>
 
             {/* Call to Action */}
-            <section className="bg-primary py-16">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl font-bold mb-4 text-st_darkest">Ready to discuss your project?</h2>
-                    <p className="text-st_darkest text-lg mb-8 max-w-2xl mx-auto">
-                        Contact us today to discuss how our engineering services can help bring your technical projects to life.
-                    </p>
-                    <a
-                        href="/contact"
-                        className="bg-st_darkest text-primary_light hover:bg-st_dark transition-colors font-bold py-3 px-8 rounded-lg">
-                        Get in Touch
-                    </a>
-                </div>
-            </section>
+            <CallToAction
+                title="Ready to discuss your project?"
+                description="Contact us today to discuss how our engineering services can help bring your technical projects to life."
+                buttons={[
+                    {
+                        text: 'Get in Touch',
+                        link: '/contact',
+                        bgColor: 'st_darkest',
+                        bgHoverColor: 'st_dark',
+                        textColor: 'primary_light',
+                    },
+                ]}
+                variant="simple"
+                bgColor="bg-st_darkest"
+                textColor="text-st_white"
+                titleColor="text-primary"
+            />
         </>
     );
 }

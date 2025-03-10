@@ -18,18 +18,18 @@ export default function PageLayout({ children, page }: PageLayoutProps) {
             <ClientProviders>
                 <Navbar page={page} />
                 <main className="flex-grow">{children}</main>
-                <footer className="bg-st_dark py-8 text-st_white">
+                <footer className="bg-st_dark py-8 group/footer">
                     <div className="container mx-auto px-4">
                         <div className="text-center">
                             <h3 className="text-2xl font-bold text-primary_light mb-4">McBride Technology Services</h3>
-                            <p className="text-sm text-st_light mb-4">
+                            <p className="text-sm text-st_lightest group-hover/footer:text-st_white mb-4">
                                 © {new Date().getFullYear()} McBride Technology Services. All rights reserved.
                             </p>
                             <div className="flex justify-center space-x-6">
-                                <Link href="/privacy" className="text-sm text-primary_lightest hover:text-primary_light transition-colors">
+                                <Link href="/privacy" className="text-sm text-primary hover:text-primary_light transition-colors">
                                     Privacy Policy
                                 </Link>
-                                <Link href="/terms" className="text-sm text-primary_lightest hover:text-primary_light transition-colors">
+                                <Link href="/terms" className="text-sm text-primary hover:text-primary_light transition-colors">
                                     Terms of Use
                                 </Link>
                             </div>

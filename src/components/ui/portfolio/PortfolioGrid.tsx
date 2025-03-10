@@ -6,6 +6,20 @@ import { PortfolioItem, PortfolioItemTag } from '@/lib/constants/Portfolio.Const
 import PortfolioCard from './PortfolioCard';
 import { cn } from '@/lib/utils';
 
+// Define the preferred order of tags for better visual distribution
+const TAG_ORDER = [
+    'Python',
+    'React',
+    'Next.js',
+    'TypeScript',
+    'Tailwind CSS',
+    'Framer Motion',
+    'Shadcn UI',
+    'PostgreSQL',
+    'Drizzle',
+    'Selenium',
+];
+
 interface PortfolioGridProps {
     items: PortfolioItem[];
     tags?: PortfolioItemTag[];
@@ -25,13 +39,31 @@ export default function PortfolioGrid({ items, tags = [] }: PortfolioGridProps) 
     }, [selectedTags, items]);
 
     // Get unique tags from items for the filter
-    const uniqueTags =
+    let uniqueTags =
         tags.length > 0
             ? tags
             : Array.from(new Set(items.flatMap((item) => item.tags.map((tag) => tag.name)))).map((tagName) => {
                   const foundTag = items.flatMap((item) => item.tags).find((tag) => tag.name === tagName);
                   return foundTag as PortfolioItemTag;
               });
+
+    // Sort tags according to the defined order
+    uniqueTags = uniqueTags.sort((a, b) => {
+        const indexA = TAG_ORDER.indexOf(a.name);
+        const indexB = TAG_ORDER.indexOf(b.name);
+
+        // If both tags are in the order array, sort by their position
+        if (indexA !== -1 && indexB !== -1) {
+            return indexA - indexB;
+        }
+
+        // If only one tag is in the order array, prioritize it
+        if (indexA !== -1) return -1;
+        if (indexB !== -1) return 1;
+
+        // If neither tag is in the order array, sort alphabetically
+        return a.name.localeCompare(b.name);
+    });
 
     const handleTagToggle = (tagName: string) => {
         setSelectedTags((prev) => {
@@ -53,8 +85,11 @@ export default function PortfolioGrid({ items, tags = [] }: PortfolioGridProps) 
                         <button
                             onClick={() => setSelectedTags([])}
                             className={cn(
-                                'rounded-full px-4 py-2 text-sm font-medium transition-colors',
-                                selectedTags.length === 0 ? 'bg-primary text-white' : 'bg-st_dark text-st_white hover:bg-st_light'
+                                'rounded-full px-4 py-2 text-sm font-medium transition-all duration-200',
+                                // When no tags are selected, "All" is considered selected
+                                selectedTags.length === 0
+                                    ? 'bg-primary text-st_darkest ring-2 ring-st_white'
+                                    : 'bg-st_darkest text-primary hover:bg-primary hover:text-st_darkest'
                             )}>
                             All
                         </button>
@@ -62,53 +97,62 @@ export default function PortfolioGrid({ items, tags = [] }: PortfolioGridProps) 
                         {uniqueTags.map((tag, index) => {
                             const isSelected = selectedTags.includes(tag.name);
 
-                            // Extract the base classes
-                            const bgColor = isSelected ? tag.bgColor : 'bg-st_dark';
-                            const textColor = isSelected ? tag.textColor : 'text-st_white';
-                            const iconColor = isSelected ? tag.iconColor : 'text-st_white';
-
-                            // Extract hover classes - these already include the hover: prefix
-                            const bgHoverClass = isSelected ? tag.bgHoverColor : 'hover:bg-st_light';
-                            const textHoverClass = isSelected ? tag.textHoverColor : '';
-                            const iconHoverClass = isSelected ? tag.iconHoverColor.replace('group-hover:', '') : '';
-
                             return (
                                 <button
                                     key={index}
                                     onClick={() => handleTagToggle(tag.name)}
                                     className={cn(
                                         'group flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200',
-                                        bgColor,
-                                        textColor,
-                                        bgHoverClass,
-                                        textHoverClass
+                                        // Use selected colors when selected, otherwise use base colors
+                                        isSelected ? tag.bgSelectedColor : tag.bgColor,
+                                        isSelected ? tag.textSelectedColor : tag.textColor,
+                                        // Only apply hover effects when not selected
+                                        !isSelected && tag.bgHoverColor,
+                                        !isSelected && tag.textHoverColor,
+                                        // Add a subtle shadow or border when selected
+                                        isSelected && 'ring-2 ring-st_white'
                                     )}>
-                                    <span
-                                        className={cn(
-                                            'size-3.5 transition-colors duration-200',
-                                            iconColor,
-                                            isSelected ? `group-hover:${iconHoverClass}` : ''
-                                        )}>
-                                        {tag.icon}
-                                    </span>
+                                    <span className={cn('size-3.5 transition-colors duration-200')}>{tag.icon}</span>
                                     <span>{tag.name}</span>
                                 </button>
                             );
                         })}
                     </div>
 
-                    {/* Selected tags summary */}
-                    {selectedTags.length > 0 && (
-                        <div className="mt-4 text-center text-sm text-st_light">
-                            <span>Showing projects with: </span>
-                            {selectedTags.map((tag, index) => (
-                                <span key={index} className="font-medium text-primary">
-                                    {tag}
-                                    {index < selectedTags.length - 1 ? ', ' : ''}
-                                </span>
-                            ))}
+                    {/* Filter status message - always shown */}
+                    <div className="mt-4 text-center text-sm">
+                        <div className="flex flex-wrap items-center justify-center gap-2">
+                            {selectedTags.length === 0 ? (
+                                <span className="text-st_light leading-6">Showing all projects</span>
+                            ) : (
+                                <>
+                                    <span className="text-st_light leading-6">Showing projects with: </span>
+                                    {selectedTags.map((tagName, index) => {
+                                        const tag = uniqueTags.find((t) => t.name === tagName);
+                                        if (!tag) return null;
+
+                                        return (
+                                            <span
+                                                key={index}
+                                                className={cn(
+                                                    'inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs',
+                                                    tag.bgSelectedColor,
+                                                    tag.textSelectedColor
+                                                )}>
+                                                <span className={'size-3'}>{tag.icon}</span>
+                                                {tagName}
+                                            </span>
+                                        );
+                                    })}
+                                    <button
+                                        onClick={() => setSelectedTags([])}
+                                        className="ml-2 text-primary hover:text-primary_dark underline text-xs">
+                                        Clear all
+                                    </button>
+                                </>
+                            )}
                         </div>
-                    )}
+                    </div>
                 </div>
             )}
 

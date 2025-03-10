@@ -2,6 +2,7 @@ import React from 'react';
 import HeroSection from '@/components/ui/HeroSection';
 import PriceCard from '@/components/ui/PriceCard';
 import ServicesCard from '@/components/ui/services-card';
+import CallToAction from '@/components/ui/CallToAction';
 
 export default function ITSupportComponentServer() {
     return (
@@ -126,19 +127,23 @@ export default function ITSupportComponentServer() {
             </section>
 
             {/* Call to Action */}
-            <section className="bg-primary py-16">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl font-bold mb-4 text-st_darkest">Ready to solve your IT challenges?</h2>
-                    <p className="text-st_darkest text-lg mb-8 max-w-2xl mx-auto">
-                        Contact us today to discuss your specific needs and how we can support your business.
-                    </p>
-                    <a
-                        href="/contact"
-                        className="bg-st_darkest text-primary_light hover:bg-st_dark transition-colors font-bold py-3 px-8 rounded-lg">
-                        Contact Our IT Team
-                    </a>
-                </div>
-            </section>
+            <CallToAction
+                title="Ready to solve your IT challenges?"
+                description="Contact us today to discuss your specific needs and how we can support your business."
+                buttons={[
+                    {
+                        text: 'Contact Our IT Team',
+                        link: '/contact',
+                        bgColor: 'st_darkest',
+                        bgHoverColor: 'st_dark',
+                        textColor: 'primary_light',
+                    },
+                ]}
+                variant="simple"
+                bgColor="bg-primary"
+                textColor="text-st_darkest"
+                titleColor="text-st_darkest"
+            />
         </>
     );
 }

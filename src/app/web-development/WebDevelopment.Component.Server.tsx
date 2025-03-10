@@ -2,6 +2,7 @@ import React from 'react';
 import HeroSection from '@/components/ui/HeroSection';
 import PriceCard from '@/components/ui/PriceCard';
 import ServicesCard from '@/components/ui/services-card';
+import CallToAction from '@/components/ui/CallToAction';
 
 export default function WebDevelopmentComponentServer() {
     return (
@@ -184,21 +185,24 @@ export default function WebDevelopmentComponentServer() {
             </section>
 
             {/* Custom Solutions */}
-            <section className="bg-st_darkest py-16">
-                <div className="container mx-auto px-4">
-                    <div className="bg-st_dark p-6 md:p-8 rounded-lg max-w-4xl mx-auto">
-                        <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center text-primary_light">Need a Custom Solution?</h2>
-                        <p className="text-center mb-6 text-st_white">
-                            Every business has unique requirements. Contact us for a personalized quote tailored to your specific needs.
-                        </p>
-                        <div className="text-center">
-                            <a href="/contact" className="btn-primary inline-block">
-                                Request a Quote
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <CallToAction
+                title="Need a Custom Solution?"
+                description="Every business has unique requirements. Contact us for a personalized quote tailored to your specific needs."
+                buttons={[
+                    {
+                        text: 'Request a Quote',
+                        link: '/contact',
+                        bgColor: 'primary',
+                        bgHoverColor: 'primary_light',
+                        textColor: 'st_white',
+                    },
+                ]}
+                variant="centered"
+                bgColor="bg-st_darkest"
+                textColor="text-st_white"
+                titleColor="text-primary_light"
+                roundedCorners={true}
+            />
 
             {/* Technologies */}
             <section className="bg-st_darkest py-16">
@@ -324,19 +328,26 @@ export default function WebDevelopmentComponentServer() {
             </section>
 
             {/* Call to Action */}
-            <section className="bg-primary py-16">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl font-bold mb-4 text-st_darkest">Ready to start your project?</h2>
-                    <p className="text-st_darkest text-lg mb-8 max-w-2xl mx-auto">
-                        Contact us today to discuss your web development needs and get a free consultation.
-                    </p>
-                    <a
-                        href="/contact"
-                        className="bg-st_darkest text-primary_light hover:bg-st_dark transition-colors font-bold py-3 px-8 rounded-lg">
-                        Get Started
-                    </a>
-                </div>
-            </section>
+            <CallToAction
+                title="Ready to start your project?"
+                description="Contact us today to discuss your web development needs and get a free consultation."
+                buttons={[
+                    {
+                        text: 'Get Started',
+                        link: '/contact',
+                        borderColor: 'primary',
+                        bgColor: 'st_darkest',
+                        bgHoverColor: 'st_dark',
+                        textColor: 'primary_light',
+                        iconName: 'ArrowRight',
+                        iconPosition: 'right',
+                    },
+                ]}
+                variant="simple"
+                bgColor="bg-st_darkest"
+                textColor="text-st_white"
+                titleColor="text-primary"
+            />
         </>
     );
 }

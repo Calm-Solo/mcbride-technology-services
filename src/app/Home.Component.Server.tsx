@@ -1,11 +1,10 @@
 import React from 'react';
-import Link from 'next/link';
 import HeroSection from '@/components/ui/HeroSection';
 import ServicesCard from '@/components/ui/services-card';
 import { TestimonialsSection } from '@/components/ui/testimonials-with-marquee';
 import { TESTIMONIALS } from '@/lib/constants/Testimonials.Constants';
-import { Mail } from 'lucide-react';
 import { MarkerLocation } from '@/components/ui/globe-background';
+import CallToAction from '@/components/ui/CallToAction';
 
 // Custom locations for the globe
 const COMPANY_LOCATIONS: MarkerLocation[] = [
@@ -149,19 +148,34 @@ export default function HomeComponentServer() {
             />
 
             {/* Call to Action Section */}
-            <section className="bg-primary_darkest py-16">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl font-bold mb-6 text-primary">Ready to Transform Your IT Infrastructure?</h2>
-                    <p className="text-xl mb-8 text-st_white max-w-3xl mx-auto">
-                        Partner with McBride Technology Services for comprehensive IT solutions that drive your business forward.
-                    </p>
-                    <Link
-                        href="/contact"
-                        className="inline-flex items-center bg-primary hover:bg-primary_light text-st_darkest font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-transform">
-                        Contact Us Today <Mail className="ml-2 h-5 w-5" />
-                    </Link>
-                </div>
-            </section>
+            <CallToAction
+                title="Ready to Transform Your IT Infrastructure?"
+                description="Partner with McBride Technology Services for comprehensive IT solutions that drive your business forward."
+                buttons={[
+                    {
+                        text: 'Contact Us Today',
+                        link: '/contact',
+                        bgColor: 'st_darkest',
+                        bgHoverColor: 'primary_light',
+                        textColor: 'primary',
+                        iconName: 'Mail',
+                        iconPosition: 'right',
+                    },
+                    {
+                        text: 'Check out our Portfolio',
+                        link: '/portfolio',
+                        bgColor: 'st_darkest',
+                        bgHoverColor: 'primary_light',
+                        textColor: 'primary',
+                        iconName: 'ArrowRight',
+                        iconPosition: 'right',
+                    },
+                ]}
+                variant="simple"
+                bgColor="bg-st"
+                textColor="text-st_white"
+                titleColor="text-primary"
+            />
         </>
     );
 }

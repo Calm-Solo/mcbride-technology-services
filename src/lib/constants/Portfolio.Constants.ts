@@ -13,13 +13,13 @@ import {
 
 export interface PortfolioItemTag {
     name: string;
+    icon: React.ReactNode;
+    bgColor: string;
     textColor: string;
     textHoverColor: string;
-    bgColor: string;
     bgHoverColor: string;
-    icon: React.ReactNode;
-    iconColor: string;
-    iconHoverColor: string;
+    textSelectedColor: string;
+    bgSelectedColor: string;
 }
 
 export interface PortfolioItem {
