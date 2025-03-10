@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { PortfolioItem, PortfolioItemTag } from '@/lib/constants/Portfolio.Constants';
-import PortfolioCard from './PortfolioCard';
+import PortfolioWaterfallItem from './PortfolioWaterfallItem';
 import { cn } from '@/lib/utils';
 
 // Define the preferred order of tags for better visual distribution
@@ -20,12 +20,12 @@ const TAG_ORDER = [
     'Selenium',
 ];
 
-interface PortfolioGridProps {
+interface PortfolioWaterfallProps {
     items: PortfolioItem[];
     tags?: PortfolioItemTag[];
 }
 
-export default function PortfolioGrid({ items, tags = [] }: PortfolioGridProps) {
+export default function PortfolioWaterfall({ items, tags = [] }: PortfolioWaterfallProps) {
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [filteredItems, setFilteredItems] = useState<PortfolioItem[]>(items);
 
@@ -77,10 +77,14 @@ export default function PortfolioGrid({ items, tags = [] }: PortfolioGridProps) 
     };
 
     return (
-        <div className="w-full">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Filter Controls */}
             {uniqueTags.length > 0 && (
-                <div className="mb-8">
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="mb-12">
                     <div className="flex flex-wrap items-center gap-2 justify-center">
                         <button
                             onClick={() => setSelectedTags([])}
@@ -153,20 +157,20 @@ export default function PortfolioGrid({ items, tags = [] }: PortfolioGridProps) 
                             )}
                         </div>
                     </div>
-                </div>
+                </motion.div>
             )}
 
-            {/* Portfolio Grid */}
-            <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {/* Portfolio Waterfall */}
+            <motion.div layout className="flex flex-col">
                 {filteredItems.map((item, index) => (
                     <motion.div
                         key={item.title}
                         layout
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}>
-                        <PortfolioCard item={item} index={index} />
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}>
+                        <PortfolioWaterfallItem item={item} index={index} />
                     </motion.div>
                 ))}
             </motion.div>

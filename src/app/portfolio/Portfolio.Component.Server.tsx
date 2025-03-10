@@ -1,7 +1,7 @@
 import React from 'react';
 import HeroSection from '@/components/ui/HeroSection';
 import { PORTFOLIO_ITEMS } from '@/lib/constants/Portfolio.Constants';
-import PortfolioGrid from '@/components/ui/portfolio/PortfolioGrid';
+import PortfolioWaterfall from '@/components/ui/portfolio/PortfolioWaterfall';
 import PortfolioSpotlight from '@/components/ui/portfolio/PortfolioSpotlight';
 import {
     REACT_TAG,
@@ -80,7 +80,7 @@ export default function PortfolioComponentServer() {
                 </div>
             </div>
 
-            {/* Portfolio Grid */}
+            {/* Portfolio Waterfall */}
             <div id="portfolio" className="w-full py-16 bg-st_dark md:py-20 group/portfolio">
                 <div className="w-full">
                     <div className="mb-12 text-center px-8">
@@ -91,8 +91,8 @@ export default function PortfolioComponentServer() {
                             Browse through our diverse portfolio of successful projects across multiple industries and technologies.
                         </p>
                     </div>
-                    <div className="w-full px-8">
-                        <PortfolioGrid
+                    <div className="w-full">
+                        <PortfolioWaterfall
                             items={PORTFOLIO_ITEMS}
                             tags={[
                                 REACT_TAG,
