@@ -118,6 +118,8 @@ export default function HomeComponentServer() {
                             description="Comprehensive IT support services for businesses of all sizes. We handle everything from troubleshooting to system maintenance."
                             link="/it-support"
                             iconName="Server"
+                            className="bg-st_darkest/80 text-primary/80 hover:bg-st_darkest hover:text-primary"
+                            descriptionClassName="text-center text-st_lightest group-hover/services-card:text-st_white"
                         />
 
                         <ServicesCard
@@ -125,6 +127,8 @@ export default function HomeComponentServer() {
                             description="Custom web development solutions that help your business establish a strong online presence and reach more customers."
                             link="/web-development"
                             iconName="Globe"
+                            className="bg-st_darkest/80 text-primary/80 hover:bg-st_darkest hover:text-primary"
+                            descriptionClassName="text-center text-st_lightest group-hover/services-card:text-st_white"
                         />
 
                         <ServicesCard
@@ -132,6 +136,8 @@ export default function HomeComponentServer() {
                             description="Expert engineering and development services for specialized technical projects and unique business needs."
                             link="/engineering"
                             iconName="Code"
+                            className="bg-st_darkest/80 text-primary/80 hover:bg-st_darkest hover:text-primary"
+                            descriptionClassName="text-center text-st_lightest group-hover/services-card:text-st_white"
                         />
                     </div>
                 </div>
@@ -153,26 +159,28 @@ export default function HomeComponentServer() {
                     {
                         text: 'Contact Us Today',
                         link: '/contact',
-                        bgColor: 'st_darkest',
-                        bgHoverColor: 'primary_light',
-                        textColor: 'primary',
+                        borderColor: 'border-st_darkest',
+                        bgHoverColor: 'hover:bg-st_darkest',
+                        textColor: 'text-st_darkest',
+                        textHoverColor: 'hover:text-primary',
                         iconName: 'Mail',
                         iconPosition: 'right',
                     },
                     {
                         text: 'Check out our Portfolio',
                         link: '/portfolio',
-                        bgColor: 'st_darkest',
-                        bgHoverColor: 'primary_light',
-                        textColor: 'primary',
+                        borderColor: 'border-st_darkest',
+                        bgHoverColor: 'hover:bg-st_darkest',
+                        textColor: 'text-st_darkest',
+                        textHoverColor: 'hover:text-primary',
                         iconName: 'ArrowRight',
                         iconPosition: 'right',
                     },
                 ]}
                 variant="simple"
-                bgColor="bg-st"
-                textColor="text-st_white"
-                titleColor="text-primary"
+                bgColor="bg-primary"
+                textColor="text-st_darkest"
+                titleColor="text-st_darkest"
             />
         </>
     );

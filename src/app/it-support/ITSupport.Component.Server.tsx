@@ -85,7 +85,6 @@ export default function ITSupportComponentServer() {
                             ]}
                             buttonText="Get Started"
                             buttonLink="/contact"
-                            headerBackgroundClass="bg-primary_dark"
                         />
 
                         {/* Business Plan */}
@@ -119,7 +118,6 @@ export default function ITSupportComponentServer() {
                             ]}
                             buttonText="Get Started"
                             buttonLink="/contact"
-                            headerBackgroundClass="bg-primary_dark"
                         />
                     </div>
                 </div>
@@ -133,9 +131,12 @@ export default function ITSupportComponentServer() {
                     {
                         text: 'Contact Our IT Team',
                         link: '/contact',
-                        bgColor: 'st_darkest',
-                        bgHoverColor: 'st_dark',
-                        textColor: 'primary_light',
+                        borderColor: 'border-st_darkest',
+                        bgHoverColor: 'hover:bg-st_darkest',
+                        textColor: 'text-st_darkest',
+                        textHoverColor: 'hover:text-primary',
+                        iconName: 'ArrowRight',
+                        iconPosition: 'right',
                     },
                 ]}
                 variant="simple"

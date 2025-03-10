@@ -39,7 +39,7 @@ export default function PriceCard({
     return (
         <div
             className={`${backgroundClass} ${isHighlighted ? 'border-2 border-primary' : 'border border-st_light'} rounded-lg overflow-hidden ${
-                scale ? 'transition-transform hover:scale-105' : ''
+                isHighlighted && scale ? 'transition-transform hover:scale-110' : scale ? 'transition-transform hover:scale-105' : ''
             } ${isHighlighted && scale ? 'transform scale-105 md:scale-110 z-10 shadow-xl' : ''} relative`}>
             {isPopular && (
                 <div className="absolute top-0 right-0 bg-yellow-500 text-blue-900 text-xs font-bold px-2 py-1 rounded-bl-lg">POPULAR</div>
@@ -68,7 +68,9 @@ export default function PriceCard({
                 </ul>
 
                 <div className="mt-6 text-center">
-                    <Link href={buttonLink} className="btn-primary inline-block">
+                    <Link
+                        href={buttonLink}
+                        className="inline-block px-4 py-2 border-primary border text-primary hover:text-st_darkest hover:bg-primary rounded-md">
                         {buttonText}
                     </Link>
                 </div>

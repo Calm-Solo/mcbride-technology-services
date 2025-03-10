@@ -521,9 +521,12 @@ export default function FreelanceEngineeringComponentServer() {
                     {
                         text: 'Get in Touch',
                         link: '/contact',
-                        bgColor: 'st_darkest',
-                        bgHoverColor: 'st_dark',
-                        textColor: 'primary_light',
+                        borderColor: 'border-primary',
+                        bgHoverColor: 'hover:bg-primary',
+                        textColor: 'text-primary',
+                        textHoverColor: 'hover:text-st_darkest',
+                        iconName: 'ArrowRight',
+                        iconPosition: 'right',
                     },
                 ]}
                 variant="simple"

@@ -26,9 +26,9 @@ export default function ServicesCard({
     link,
     iconName,
     className = 'bg-st_darkest hover:bg-st_dark',
-    iconClassName = 'w-12 h-12 text-primary group-hover/services-card:text-primary_dark',
-    titleClassName = 'text-xl font-bold mb-4 text-primary text-center group-hover/services-card:text-primary_dark',
-    descriptionClassName = 'text-st_lightest text-center group-hover/services-card:text-st_white',
+    iconClassName = 'w-12 h-12',
+    titleClassName = 'text-xl font-bold mb-4 text-center',
+    descriptionClassName = 'text-center',
     withAnimation = true,
 }: ServicesCardProps) {
     // Function to get the icon component based on name
@@ -66,7 +66,7 @@ export default function ServicesCard({
                     <h3 className={titleClassName}>{title}</h3>
                     <p className={descriptionClassName}>{description}</p>
                     <div className="mt-6 text-center">
-                        <span className="inline-flex items-center text-primary group-hover/services-card:text-primary_dark transition-colors group/button">
+                        <span className="inline-flex items-center  transition-colors group/button">
                             Learn More{' '}
                             <ArrowRight className="ml-2 w-4 h-4 transform transition-transform duration-300 group-hover/button:translate-x-1" />
                         </span>

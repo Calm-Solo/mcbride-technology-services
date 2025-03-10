@@ -98,13 +98,12 @@ export default function CallToAction({
 
         // Apply default values unless overridden
         // Background and text colors
-        const bgClasses = button.bgColor ? `bg-${button.bgColor}` : 'bg-st_darkest';
-        const textClasses = button.textColor ? `text-${button.textColor}` : 'text-primary';
-        const hoverBgClasses = button.bgHoverColor ? `hover:bg-${button.bgHoverColor}` : 'hover:bg-primary';
-        const hoverTextClasses = button.textHoverColor ? `hover:text-${button.textHoverColor}` : 'hover:text-st_darkest';
-
+        const bgClasses = `${button.bgColor}`;
+        const textClasses = `${button.textColor}`;
+        const hoverBgClasses = `${button.bgHoverColor}`;
+        const hoverTextClasses = `${button.textHoverColor}`;
         // Border classes - default to primary border if not specified
-        const borderClasses = button.borderColor ? `border border-${button.borderColor}` : 'border border-primary';
+        const borderClasses = `border ${button.borderColor}`;
 
         return cn(baseClasses, bgClasses, textClasses, hoverBgClasses, hoverTextClasses, borderClasses, button.className);
     };
