@@ -2,7 +2,7 @@ import { PortfolioItemTag } from './Portfolio.Constants';
 
 import { RiNextjsFill } from 'react-icons/ri';
 import { FaReact } from 'react-icons/fa';
-import { SiTailwindcss } from 'react-icons/si';
+import { SiStripe, SiTailwindcss } from 'react-icons/si';
 import { SiTypescript } from 'react-icons/si';
 import { SiShadcnui } from 'react-icons/si';
 import { TbBrandFramerMotion } from 'react-icons/tb';
@@ -118,5 +118,16 @@ export const DRIZZLE_TAG: PortfolioItemTag = {
     bgHoverColor: 'hover:bg-yellow-500',
     textHoverColor: 'hover:text-st_darkest',
     bgSelectedColor: 'bg-yellow-500',
+    textSelectedColor: 'text-st_darkest',
+};
+
+export const STRIPE_TAG: PortfolioItemTag = {
+    name: 'Stripe',
+    icon: <SiStripe />,
+    bgColor: 'bg-st_darkest',
+    textColor: 'text-purple-500',
+    bgHoverColor: 'hover:bg-purple-500',
+    textHoverColor: 'hover:text-st_darkest',
+    bgSelectedColor: 'bg-purple-500',
     textSelectedColor: 'text-st_darkest',
 };

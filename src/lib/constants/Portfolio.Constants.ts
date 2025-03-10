@@ -9,6 +9,7 @@ import {
     FRAMER_MOTION_TAG,
     SELENIUM_TAG,
     PYTHON_TAG,
+    STRIPE_TAG,
 } from './PortfolioTags.Constants';
 
 export interface PortfolioItemTag {
@@ -50,7 +51,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
         description: 'JWS Fine Art is a platform that helps you buy and sell fine art.',
         image: '/portfolio/jws-fine-art.png',
         link: 'https://www.jwsfineart.com/',
-        tags: [REACT_TAG, NEXT_JS_TAG, TAILWIND_CSS_TAG, TYPE_SCRIPT_TAG, POSTGRES_TAG, DRIZZLE_TAG],
+        tags: [REACT_TAG, NEXT_JS_TAG, TAILWIND_CSS_TAG, TYPE_SCRIPT_TAG, POSTGRES_TAG, DRIZZLE_TAG, STRIPE_TAG],
     },
     {
         title: 'First Baptist Church of North Highlands',
@@ -64,7 +65,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
         description: 'Rust Wipes helps users find the best servers for the survival game Rust using specialized algorithms and filters.',
         image: '/portfolio/rust-wipes.png',
         link: 'https://www.rustwipes.net/',
-        tags: [REACT_TAG, NEXT_JS_TAG, TAILWIND_CSS_TAG, TYPE_SCRIPT_TAG, POSTGRES_TAG, DRIZZLE_TAG, SELENIUM_TAG, PYTHON_TAG],
+        tags: [REACT_TAG, NEXT_JS_TAG, TAILWIND_CSS_TAG, TYPE_SCRIPT_TAG, POSTGRES_TAG, DRIZZLE_TAG, STRIPE_TAG, SELENIUM_TAG, PYTHON_TAG],
     },
     {
         title: 'Torrey Smith Developer Portfolio',
@@ -78,6 +79,6 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
         description: 'AI Spec Generator is a platform that helps you generate AI specs for your project.',
         image: '/portfolio/ai-spec-gen.png',
         link: 'https://www.aispecgen.com/',
-        tags: [REACT_TAG, NEXT_JS_TAG, TAILWIND_CSS_TAG, TYPE_SCRIPT_TAG, POSTGRES_TAG, DRIZZLE_TAG, FRAMER_MOTION_TAG],
+        tags: [REACT_TAG, NEXT_JS_TAG, TAILWIND_CSS_TAG, TYPE_SCRIPT_TAG, POSTGRES_TAG, DRIZZLE_TAG, STRIPE_TAG, FRAMER_MOTION_TAG],
     },
 ];

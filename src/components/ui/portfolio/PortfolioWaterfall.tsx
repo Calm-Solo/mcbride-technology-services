@@ -18,6 +18,7 @@ const TAG_ORDER = [
     'PostgreSQL',
     'Drizzle',
     'Selenium',
+    'Stripe',
 ];
 
 interface PortfolioWaterfallProps {

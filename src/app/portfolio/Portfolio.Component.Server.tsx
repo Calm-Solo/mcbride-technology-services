@@ -14,6 +14,7 @@ import {
     FRAMER_MOTION_TAG,
     SELENIUM_TAG,
     PYTHON_TAG,
+    STRIPE_TAG,
 } from '@/lib/constants/PortfolioTags.Constants';
 import CallToAction from '@/components/ui/CallToAction';
 
@@ -105,6 +106,7 @@ export default function PortfolioComponentServer() {
                                 FRAMER_MOTION_TAG,
                                 SELENIUM_TAG,
                                 PYTHON_TAG,
+                                STRIPE_TAG,
                             ]}
                         />
                     </div>
