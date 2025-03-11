@@ -57,6 +57,7 @@ export interface HeroSectionProps {
     fluidSwirlColor?: string;
     particleColor?: string;
     particleCount?: number;
+    particleConnectionOpacity?: number;
     globeDark?: number;
     globeVerticalOffset?: number;
     locations?: MarkerLocation[];
@@ -95,6 +96,7 @@ export default function HeroSection({
     fluidSwirlColor = 'rgba(0, 128, 128, 0.025)', // Default to semi-transparent primary color
     particleColor = 'rgba(87, 204, 153, 0.6)', // Default to semi-transparent primary color
     particleCount = 80, // Default particle count
+    particleConnectionOpacity = 0.15, // Default particle connection opacity
     globeDark = 0, // Default globe dark setting
     globeVerticalOffset = 0, // Default to centered (0%)
     locations, // Locations for globe markers
@@ -154,7 +156,13 @@ export default function HeroSection({
             {backgroundType === 'paths' && <BackgroundPaths />}
             {backgroundType === 'magnetLines' && <MagnetLinesBackground lineColor={magnetLinesColor} />}
             {backgroundType === 'fluid-swirl' && <FluidSwirl color={fluidSwirlColor} />}
-            {backgroundType === 'particles' && <ParticlesBackground particleColor={particleColor} particleCount={particleCount} />}
+            {backgroundType === 'particles' && (
+                <ParticlesBackground
+                    particleColor={particleColor}
+                    particleCount={particleCount}
+                    connectionOpacity={particleConnectionOpacity}
+                />
+            )}
             {backgroundType === 'globe' && <GlobeBackground dark={globeDark} verticalOffset={globeVerticalOffset} locations={locations} />}
             {backgroundType === 'animated-gradient' && (
                 <AnimatedGradientBackground

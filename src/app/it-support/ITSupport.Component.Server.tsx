@@ -34,6 +34,7 @@ export default function ITSupportComponentServer() {
                 backgroundType="particles"
                 particleColor="rgba(87, 204, 153, 0.5)"
                 particleCount={100}
+                particleConnectionOpacity={0.9}
                 contentBgOpacity={0.8}
                 glowColor="primary_dark"
                 glowSize="90px"
