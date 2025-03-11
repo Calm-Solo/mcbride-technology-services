@@ -38,7 +38,7 @@ export default function PortfolioSpotlight({ item }: PortfolioSpotlightProps) {
                                 duration: 0.8,
                                 ease: 'easeInOut',
                             }}
-                            className="group/spotlight w-full max-w-4xl mt-16 overflow-hidden rounded-xl bg-st_light hover:bg-st backdrop-blur-sm p-4">
+                            className="group/spotlight w-full max-w-4xl mt-16 overflow-hidden rounded-xl bg-st_light hover:bg-st_dark backdrop-blur-sm p-4">
                             <div className="flex flex-col lg:flex-row gap-4">
                                 <div className="relative flex-shrink-0 w-full lg:w-1/2 aspect-video rounded-lg overflow-hidden">
                                     <Image
@@ -52,11 +52,11 @@ export default function PortfolioSpotlight({ item }: PortfolioSpotlightProps) {
                                 </div>
 
                                 <div className="flex flex-col justify-center">
-                                    <h2 className="text-3xl font-bold bg-gradient-to-br from-primary to-primary_light bg-clip-text text-transparent mb-4">
+                                    <h2 className="text-3xl font-bold text-primary group-hover/spotlight:text-primary_light mb-4">
                                         {item.title}
                                     </h2>
 
-                                    <p className="text-st_white mb-6">{item.description}</p>
+                                    <p className="text-st_darkest group-hover/spotlight:text-st_white mb-6">{item.description}</p>
 
                                     <div className="flex flex-wrap gap-2 mb-6">
                                         {item.tags.map((tag, index) => (
