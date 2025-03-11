@@ -52,10 +52,10 @@ export default function WebDevelopmentComponentServer() {
             />
 
             {/* Services Overview */}
-            <section className="bg-st_dark py-16">
+            <section className="bg-st py-16">
                 <div className="container mx-auto px-4">
                     <div className="max-w-6xl mx-auto">
-                        <h2 className="text-3xl font-bold mb-12 text-center text-primary_light">Our Web Development Services</h2>
+                        <h2 className="text-3xl font-bold mb-12 text-center text-primary">Our Web Development Services</h2>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center">
                             <ServicesCard
@@ -86,7 +86,7 @@ export default function WebDevelopmentComponentServer() {
             <section className="bg-st_darkest py-16">
                 <div className="container mx-auto px-4">
                     <div className="max-w-6xl mx-auto">
-                        <h2 className="text-3xl font-bold mb-12 text-center text-primary_light">Website Development Pricing</h2>
+                        <h2 className="text-3xl font-bold mb-12 text-center text-primary pb-4">Website Development Pricing</h2>
 
                         <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
                             {/* Basic Plan */}
@@ -146,10 +146,10 @@ export default function WebDevelopmentComponentServer() {
             </section>
 
             {/* Maintenance Plans */}
-            <section className="bg-st_dark py-16">
+            <section className="bg-st_darkest py-4">
                 <div className="container mx-auto px-4">
                     <div className="max-w-6xl mx-auto">
-                        <h2 className="text-2xl md:text-3xl font-bold mb-12 text-center text-primary_light">Website Maintenance Plans</h2>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-12 text-center text-primary">Website Maintenance Plans</h2>
                         <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
                             {/* Basic Maintenance */}
                             <PriceCard
@@ -226,14 +226,14 @@ export default function WebDevelopmentComponentServer() {
             */}
 
             {/* Technologies */}
-            <section className="bg-st_darkest py-20 group/tech-section relative overflow-hidden">
+            <section className="bg-st py-20 group/tech-section relative overflow-hidden">
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-6xl mx-auto">
                         <div className="text-center mb-16">
-                            <h2 className="text-4xl font-bold mb-4 text-primary_light group-hover/tech-section:text-primary transition-colors duration-300">
+                            <h2 className="text-4xl font-bold mb-4 text-primary group-hover/tech-section:text-primary_light transition-colors duration-300">
                                 Our Technologies
                             </h2>
-                            <p className="text-st_lightest max-w-3xl mx-auto">
+                            <p className="text-st_lightest max-w-3xl mx-auto group-hover/tech-section:text-st_white transition-colors duration-300">
                                 We leverage cutting-edge web technologies to build fast, responsive, and scalable websites and applications
                                 tailored to your needs.
                             </p>
@@ -241,7 +241,7 @@ export default function WebDevelopmentComponentServer() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                             {/* Frontend */}
-                            <div className="bg-st_dark/70 backdrop-blur-sm p-8 rounded-lg border border-primary/20 hover:border-primary/60 transition-all duration-300 transform hover:-translate-y-2">
+                            <div className="bg-st_dark backdrop-blur-sm p-8 rounded-lg border border-primary/20 hover:border-primary/60 hover:bg-st_darkest transition-all duration-300 transform hover:-translate-y-2">
                                 <div className="flex items-center mb-4">
                                     <span className="text-primary text-2xl mr-3">
                                         <FaReact />
@@ -289,7 +289,7 @@ export default function WebDevelopmentComponentServer() {
                             </div>
 
                             {/* Backend */}
-                            <div className="bg-st_dark/70 backdrop-blur-sm p-8 rounded-lg border border-primary/20 hover:border-primary/60 transition-all duration-300 transform hover:-translate-y-2">
+                            <div className="bg-st_dark backdrop-blur-sm p-8 rounded-lg border border-primary/20 hover:border-primary/60 hover:bg-st_darkest transition-all duration-300 transform hover:-translate-y-2">
                                 <div className="flex items-center mb-4">
                                     <span className="text-primary text-2xl mr-3">
                                         <FaNodeJs />
@@ -337,7 +337,7 @@ export default function WebDevelopmentComponentServer() {
                             </div>
 
                             {/* Database & CMS */}
-                            <div className="bg-st_dark/70 backdrop-blur-sm p-8 rounded-lg border border-primary/20 hover:border-primary/60 transition-all duration-300 transform hover:-translate-y-2">
+                            <div className="bg-st_dark backdrop-blur-sm p-8 rounded-lg border border-primary/20 hover:border-primary/60 hover:bg-st_darkest transition-all duration-300 transform hover:-translate-y-2">
                                 <div className="flex items-center mb-4">
                                     <span className="text-primary text-2xl mr-3">
                                         <SiPostgresql />
@@ -385,7 +385,7 @@ export default function WebDevelopmentComponentServer() {
                             </div>
 
                             {/* Development Tools */}
-                            <div className="bg-st_dark/70 backdrop-blur-sm p-8 rounded-lg border border-primary/20 hover:border-primary/60 transition-all duration-300 transform hover:-translate-y-2">
+                            <div className="bg-st_dark backdrop-blur-sm p-8 rounded-lg border border-primary/20 hover:border-primary/60 hover:bg-st_darkest transition-all duration-300 transform hover:-translate-y-2">
                                 <div className="flex items-center mb-4">
                                     <span className="text-primary text-2xl mr-3">
                                         <svg
@@ -499,10 +499,10 @@ export default function WebDevelopmentComponentServer() {
             </section>
 
             {/* Process */}
-            <section className="bg-st_dark py-16">
+            <section className="bg-st_darkest py-16">
                 <div className="container mx-auto px-4">
                     <div className="max-w-4xl mx-auto">
-                        <h2 className="text-3xl font-bold mb-12 text-center text-primary_light">Our Development Process</h2>
+                        <h2 className="text-3xl font-bold mb-12 text-center text-primary">Our Development Process</h2>
 
                         <div className="space-y-8">
                             <div className="card flex flex-col md:flex-row md:items-center">
@@ -591,7 +591,7 @@ export default function WebDevelopmentComponentServer() {
                     },
                 ]}
                 variant="simple"
-                bgColor="bg-st_darkest"
+                bgColor="bg-st"
                 textColor="text-st_white"
                 titleColor="text-primary"
             />

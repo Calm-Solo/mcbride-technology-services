@@ -53,7 +53,8 @@ export default function ContactComponent() {
             <ContactComponentServer />
 
             {/* Contact Information */}
-            <section className="py-12 bg-st">
+            <section className="py-16 bg-st flex flex-col items-center justify-center gap-8">
+                <h2 className="text-3xl font-bold text-center text-primary_light">Contact Information</h2>
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div className="bg-st_dark p-6 rounded-lg">
@@ -92,10 +93,38 @@ export default function ContactComponent() {
                         </div>
                     </div>
                 </div>
+                {/* Map Section */}
+                <div className="w-full mx-auto px-4 bg-st group/map">
+                    <div className="max-w-3xl mx-auto">
+                        <div className="bg-st_dark p-6 rounded-lg">
+                            <div className="flex items-center mb-4">
+                                <MapPin className="h-6 w-6 text-primary group-hover/map:text-primary_light mr-3" />
+                                <h3 className="text-xl font-bold text-primary group-hover/map:text-primary_light">Our Location</h3>
+                            </div>
+                            <p className="text-st_lightest group-hover/map:text-st_white mb-4">
+                                3626 Fair Oaks Blvd
+                                <br />
+                                Sacramento, CA 95864
+                                <br />
+                                United States
+                            </p>
+                            <div className="h-[400px] rounded-lg overflow-hidden">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3118.8859670454483!2d-121.38387548431568!3d38.62006177961685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809ada8b063e3d4f%3A0x76d8506766d55d78!2s3626%20Fair%20Oaks%20Blvd%2C%20Sacramento%2C%20CA%2095864!5e0!3m2!1sen!2sus!4v1627945432427!5m2!1sen!2sus"
+                                    width="100%"
+                                    height="100%"
+                                    style={{ border: 0 }}
+                                    allowFullScreen={false}
+                                    loading="lazy"
+                                    className="w-full h-full"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             {/* Contact Form Section */}
-            <section className="py-12 bg-st_dark">
+            <section className="py-12 bg-st_darkest">
                 <div className="container mx-auto px-4">
                     <div className="max-w-3xl mx-auto">
                         <h2 className="text-3xl font-bold mb-8 text-center text-primary_light">Get in Touch</h2>
@@ -252,37 +281,6 @@ export default function ContactComponent() {
                 </div>
             </section>
 
-            {/* Map Section */}
-            <section className="py-12 bg-st">
-                <div className="container mx-auto px-4">
-                    <div className="max-w-3xl mx-auto">
-                        <div className="bg-st_dark p-6 rounded-lg">
-                            <div className="flex items-center mb-4">
-                                <MapPin className="h-6 w-6 text-primary mr-3" />
-                                <h3 className="text-xl font-bold text-primary_light">Our Location</h3>
-                            </div>
-                            <p className="text-st_light mb-4">
-                                3626 Fair Oaks Blvd
-                                <br />
-                                Sacramento, CA 95864
-                                <br />
-                                United States
-                            </p>
-                            <div className="h-[400px] rounded-lg overflow-hidden">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3118.8859670454483!2d-121.38387548431568!3d38.62006177961685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809ada8b063e3d4f%3A0x76d8506766d55d78!2s3626%20Fair%20Oaks%20Blvd%2C%20Sacramento%2C%20CA%2095864!5e0!3m2!1sen!2sus!4v1627945432427!5m2!1sen!2sus"
-                                    width="100%"
-                                    height="100%"
-                                    style={{ border: 0 }}
-                                    allowFullScreen={false}
-                                    loading="lazy"
-                                    className="w-full h-full"></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             {/* Call to Action to explore services */}
             <CallToAction
                 title="Explore Our Services"
@@ -320,9 +318,12 @@ export default function ContactComponent() {
                     },
                 ]}
                 variant="simple"
-                bgColor="bg-st_darkest"
-                textColor="text-st_white"
+                bgColor="bg-st"
+                textColor="text-st_lightest"
+                textHoverColor="group-hover/cta:text-st_white"
                 titleColor="text-primary"
+                titleHoverColor="group-hover/cta:text-primary_light"
+                containerClassName="w-full pb-16"
             />
         </div>
     );

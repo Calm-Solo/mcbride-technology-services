@@ -1,7 +1,7 @@
 import React from 'react';
 import PageLayout from '@/components/layout/PageLayout';
 import { Metadata } from 'next';
-import FreelanceEngineeringComponentServer from './FreelanceEngineering.Component.Server';
+import FreelanceEngineeringComponentServer from './Engineering.Component.Server';
 
 export const metadata: Metadata = {
     title: 'Freelance Engineering | McBride Technology Services',

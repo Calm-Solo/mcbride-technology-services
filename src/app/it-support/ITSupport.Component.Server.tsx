@@ -40,10 +40,10 @@ export default function ITSupportComponentServer() {
             />
 
             {/* Services Overview */}
-            <section className="bg-st_dark py-16">
+            <section className="bg-st py-16">
                 <div className="container mx-auto px-4">
                     <div className="max-w-6xl mx-auto">
-                        <h2 className="text-3xl font-bold mb-12 text-center text-primary_light">Our IT Support Services</h2>
+                        <h2 className="text-3xl font-bold mb-12 text-center text-primary">Our IT Support Services</h2>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center">
                             <ServicesCard
@@ -51,6 +51,8 @@ export default function ITSupportComponentServer() {
                                 description="Our responsive help desk provides timely assistance for all your technical issues. From software troubleshooting to hardware problems, we've got you covered."
                                 link="/contact?service=helpdesk"
                                 iconName="Server"
+                                className="bg-st_darkest/80 text-primary/80 hover:bg-st_darkest hover:text-primary"
+                                descriptionClassName="text-center text-st_lightest group-hover/services-card:text-st_white"
                             />
 
                             <ServicesCard
@@ -58,6 +60,9 @@ export default function ITSupportComponentServer() {
                                 description="Keep your business connected with our comprehensive network management services. We ensure your network remains secure, fast, and reliable."
                                 link="/contact?service=network"
                                 iconName="Globe"
+                                iconClassName="w-12 h-12 text-primary"
+                                className="bg-st_darkest/80 text-primary/80 hover:bg-st_darkest hover:text-primary"
+                                descriptionClassName="text-center text-st_lightest group-hover/services-card:text-st_white"
                             />
 
                             {/* Additional services can be added here */}
@@ -131,18 +136,18 @@ export default function ITSupportComponentServer() {
                     {
                         text: 'Contact Our IT Team',
                         link: '/contact',
-                        borderColor: 'border-st_darkest',
-                        bgHoverColor: 'hover:bg-st_darkest',
-                        textColor: 'text-st_darkest',
-                        textHoverColor: 'hover:text-primary',
+                        borderColor: 'border-primary',
+                        bgHoverColor: 'hover:bg-primary',
+                        textColor: 'text-primary',
+                        textHoverColor: 'hover:text-st_darkest',
                         iconName: 'ArrowRight',
                         iconPosition: 'right',
                     },
                 ]}
                 variant="simple"
-                bgColor="bg-primary"
-                textColor="text-st_darkest"
-                titleColor="text-st_darkest"
+                bgColor="bg-st"
+                textColor="text-st_white"
+                titleColor="text-primary"
             />
         </>
     );

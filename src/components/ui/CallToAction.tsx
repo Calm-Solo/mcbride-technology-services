@@ -40,7 +40,9 @@ export interface CallToActionProps {
     variant?: 'centered' | 'split' | 'simple';
     bgColor?: string;
     textColor?: string;
+    textHoverColor?: string;
     titleColor?: string;
+    titleHoverColor?: string;
     titleSize?: string;
     roundedCorners?: boolean;
     // Image options (for split variant)
@@ -57,8 +59,10 @@ export default function CallToAction({
     buttons = [],
     variant = 'simple',
     bgColor = 'bg-primary',
-    textColor = 'text-st_darkest',
+    textColor = 'text-st_lightest',
+    textHoverColor = 'hover:text-st_white',
     titleColor = 'text-st_darkest',
+    titleHoverColor = 'group-hover/map:text-primary_light',
     titleSize = 'text-3xl',
     roundedCorners = false,
     imageSrc,
@@ -111,10 +115,10 @@ export default function CallToAction({
     // Simple centered variant
     if (variant === 'simple') {
         return (
-            <section className={cn('py-16', bgColor, containerClassName)}>
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className={cn('font-bold mb-4', titleSize, titleColor)}>{title}</h2>
-                    <p className={cn('text-lg mb-8 max-w-2xl mx-auto', textColor)}>{description}</p>
+            <section className={cn('group/cta py-16 w-full', bgColor, containerClassName)}>
+                <div className="mx-auto px-4 text-center">
+                    <h2 className={cn('font-bold mb-4', titleSize, titleColor, titleHoverColor)}>{title}</h2>
+                    <p className={cn('text-lg mb-8 max-w-2xl mx-auto', textColor, textHoverColor)}>{description}</p>
                     <div className="flex flex-wrap justify-center gap-4">
                         {buttons.map((button, index) => (
                             <Link key={index} href={button.link} className={getButtonClasses(button)}>
@@ -132,7 +136,7 @@ export default function CallToAction({
     // Split layout with image
     if (variant === 'split') {
         return (
-            <section className={cn('py-16', bgColor, containerClassName)}>
+            <section className={cn('group/cta py-16', bgColor, containerClassName)}>
                 <div className="container mx-auto px-4">
                     <div
                         className={cn(
@@ -168,7 +172,7 @@ export default function CallToAction({
 
     // Centered variant with card-like appearance
     return (
-        <section className={cn('py-16', bgColor, containerClassName)}>
+        <section className={cn('group/cta py-16', bgColor, containerClassName)}>
             <div className="container mx-auto px-4">
                 <div className={cn('bg-st_dark p-6 md:p-8 max-w-4xl mx-auto', contentClassName, roundedCorners ? 'rounded-lg' : '')}>
                     <h2 className={cn('font-bold mb-4 text-center', titleSize, titleColor)}>{title}</h2>

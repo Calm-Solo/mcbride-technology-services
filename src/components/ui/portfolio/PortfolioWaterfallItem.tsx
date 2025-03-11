@@ -61,7 +61,7 @@ export default function PortfolioWaterfallItem({ item, index }: PortfolioWaterfa
             <div
                 ref={ref}
                 className={cn(
-                    'group/portfolio-item relative overflow-hidden rounded-lg bg-st shadow-lg transition-all duration-300 hover:shadow-xl hover:bg-st_light mb-16',
+                    'group/portfolio-item relative overflow-hidden rounded-lg bg-st_light shadow-lg transition-all duration-300 hover:shadow-xl hover:bg-st_dark hover:border-primary',
                     'transform transition-all duration-700 ease-out',
                     !isVisible && 'opacity-0',
                     !isVisible && (isEven ? '-translate-x-96' : 'translate-x-96'),

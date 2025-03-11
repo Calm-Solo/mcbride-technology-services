@@ -123,7 +123,7 @@ export default function PortfolioWaterfall({ items, tags = [] }: PortfolioWaterf
                 <div
                     ref={filterRef}
                     className={cn(
-                        'mb-12 transform transition-all duration-500 ease-out',
+                        'mb-8 transform transition-all duration-500 ease-out',
                         !filterVisible && 'opacity-0 -translate-y-12',
                         filterVisible && 'opacity-100 translate-y-0'
                     )}>
@@ -134,7 +134,7 @@ export default function PortfolioWaterfall({ items, tags = [] }: PortfolioWaterf
                                 'rounded-full px-4 py-2 text-sm font-medium transition-all duration-200',
                                 // When no tags are selected, "All" is considered selected
                                 selectedTags.length === 0
-                                    ? 'bg-primary text-st_darkest ring-2 ring-st_white'
+                                    ? 'bg-primary text-st_darkest'
                                     : 'bg-st_darkest text-primary hover:bg-primary hover:text-st_darkest'
                             )}>
                             All
@@ -156,7 +156,7 @@ export default function PortfolioWaterfall({ items, tags = [] }: PortfolioWaterf
                                         !isSelected && tag.bgHoverColor,
                                         !isSelected && tag.textHoverColor,
                                         // Add a subtle shadow or border when selected
-                                        isSelected && 'ring-2 ring-st_white'
+                                        isSelected && ''
                                     )}>
                                     <span className={cn('size-3.5 transition-colors duration-200')}>{tag.icon}</span>
                                     <span>{tag.name}</span>

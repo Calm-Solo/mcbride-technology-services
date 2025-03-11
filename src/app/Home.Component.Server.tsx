@@ -109,9 +109,9 @@ export default function HomeComponentServer() {
             />
 
             {/* Services Section with improved styling */}
-            <section className="bg-st_dark py-16">
+            <section className="bg-st py-16">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-3xl font-bold mb-12 text-center text-primary_light">Our Services</h2>
+                    <h2 className="text-3xl font-bold mb-12 text-center text-primary">Our Services</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <ServicesCard
                             title="IT Support"
@@ -159,28 +159,28 @@ export default function HomeComponentServer() {
                     {
                         text: 'Contact Us Today',
                         link: '/contact',
-                        borderColor: 'border-st_darkest',
-                        bgHoverColor: 'hover:bg-st_darkest',
-                        textColor: 'text-st_darkest',
-                        textHoverColor: 'hover:text-primary',
+                        borderColor: 'border-primary',
+                        bgHoverColor: 'hover:bg-primary',
+                        textColor: 'text-primary',
+                        textHoverColor: 'hover:text-st_darkest',
                         iconName: 'Mail',
                         iconPosition: 'right',
                     },
                     {
                         text: 'Check out our Portfolio',
                         link: '/portfolio',
-                        borderColor: 'border-st_darkest',
-                        bgHoverColor: 'hover:bg-st_darkest',
-                        textColor: 'text-st_darkest',
-                        textHoverColor: 'hover:text-primary',
+                        borderColor: 'border-primary',
+                        bgHoverColor: 'hover:bg-primary',
+                        textColor: 'text-primary',
+                        textHoverColor: 'hover:text-st_darkest',
                         iconName: 'ArrowRight',
                         iconPosition: 'right',
                     },
                 ]}
                 variant="simple"
-                bgColor="bg-primary"
-                textColor="text-st_darkest"
-                titleColor="text-st_darkest"
+                bgColor="bg-st"
+                textColor="text-st_white"
+                titleColor="text-primary"
             />
         </>
     );

@@ -58,7 +58,7 @@ export default function FreelanceEngineeringComponentServer() {
             />
 
             {/* Services Overview */}
-            <section id="services" className="bg-st_dark py-20 group/services-section">
+            <section id="services" className="bg-st py-20 group/services-section">
                 <div className="container mx-auto px-4">
                     <div className="max-w-7xl mx-auto">
                         <div className="text-center mb-16">
@@ -133,14 +133,14 @@ export default function FreelanceEngineeringComponentServer() {
             </section>
 
             {/* Technologies */}
-            <section className="bg-st_darkest py-20 group/tech-section relative overflow-hidden">
+            <section className="bg-st py-4 group/tech-section relative overflow-hidden">
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-6xl mx-auto">
                         <div className="text-center mb-16">
-                            <h2 className="text-4xl font-bold mb-4 text-primary_light group-hover/tech-section:text-primary transition-colors duration-300">
+                            <h2 className="text-4xl font-bold mb-4 text-primary group-hover/tech-section:text-primary_light transition-colors duration-300">
                                 Our Technical Expertise
                             </h2>
-                            <p className="text-st_lightest max-w-3xl mx-auto">
+                            <p className="text-st_lightest max-w-3xl mx-auto group-hover/tech-section:text-st_white transition-colors duration-300">
                                 We leverage modern technologies and frameworks to deliver high-quality, scalable, and maintainable
                                 solutions.
                             </p>
@@ -148,7 +148,7 @@ export default function FreelanceEngineeringComponentServer() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                             {/* Frontend */}
-                            <div className="bg-st_dark/70 backdrop-blur-sm p-8 rounded-lg border border-primary/20 hover:border-primary/60 transition-all duration-300 transform hover:-translate-y-2">
+                            <div className="card min-w-sm max-w-sm flex flex-wrap h-full bg-st_darkest p-6 rounded-lg border border-primary/50 hover:border-primary transition-all duration-300 transform hover:-translate-y-2">
                                 <div className="flex items-center mb-4">
                                     <span className="text-primary text-2xl mr-3">
                                         <FaReact />
@@ -196,7 +196,7 @@ export default function FreelanceEngineeringComponentServer() {
                             </div>
 
                             {/* Backend */}
-                            <div className="bg-st_dark/70 backdrop-blur-sm p-8 rounded-lg border border-primary/20 hover:border-primary/60 transition-all duration-300 transform hover:-translate-y-2">
+                            <div className="card min-w-sm max-w-sm flex flex-wrap h-full bg-st_darkest p-6 rounded-lg border border-primary/50 hover:border-primary transition-all duration-300 transform hover:-translate-y-2">
                                 <div className="flex items-center mb-4">
                                     <span className="text-primary text-2xl mr-3">
                                         <FaPython />
@@ -268,7 +268,7 @@ export default function FreelanceEngineeringComponentServer() {
                             </div>
 
                             {/* Testing & QA */}
-                            <div className="bg-st_dark/70 backdrop-blur-sm p-8 rounded-lg border border-primary/20 hover:border-primary/60 transition-all duration-300 transform hover:-translate-y-2">
+                            <div className="card min-w-sm max-w-sm flex flex-wrap h-full bg-st_darkest p-6 rounded-lg border border-primary/50 hover:border-primary transition-allduration-300 transform hover:-translate-y-2">
                                 <div className="flex items-center mb-4">
                                     <span className="text-primary text-2xl mr-3">
                                         <SiSelenium />
@@ -352,7 +352,7 @@ export default function FreelanceEngineeringComponentServer() {
                             </div>
 
                             {/* DevOps & Infrastructure */}
-                            <div className="bg-st_dark/70 backdrop-blur-sm p-8 rounded-lg border border-primary/20 hover:border-primary/60 transition-all duration-300 transform hover:-translate-y-2">
+                            <div className="card min-w-sm max-w-sm flex flex-wrap h-full bg-st_darkest p-6 rounded-lg border border-primary/50 hover:border-primary transition-all duration-300 transform hover:-translate-y-2">
                                 <div className="flex items-center mb-4">
                                     <span className="text-primary text-2xl mr-3">
                                         <svg
@@ -464,10 +464,10 @@ export default function FreelanceEngineeringComponentServer() {
             </section>
 
             {/* Engagement Models */}
-            <section className="bg-st_dark py-16">
+            <section className="bg-st_darkest py-16">
                 <div className="container mx-auto px-4">
                     <div className="max-w-4xl mx-auto">
-                        <h2 className="text-3xl font-bold mb-12 text-center text-primary_light">Engagement Models</h2>
+                        <h2 className="text-3xl font-bold mb-12 text-center text-primary">Engagement Models</h2>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             <PriceCard
@@ -530,7 +530,7 @@ export default function FreelanceEngineeringComponentServer() {
                     },
                 ]}
                 variant="simple"
-                bgColor="bg-st_darkest"
+                bgColor="bg-st"
                 textColor="text-st_white"
                 titleColor="text-primary"
             />

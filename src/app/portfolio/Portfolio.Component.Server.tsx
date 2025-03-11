@@ -67,11 +67,13 @@ export default function PortfolioComponentServer() {
             </section>
 
             {/* Feature Project Spotlight */}
-            <div className="w-full py-16 md:py-20">
+            <div className="w-full py-16 md:py-20 bg-st group/feature-spotlight">
                 <div className="w-full">
                     <div className="mb-12 text-center">
-                        <h2 className="mb-4 text-3xl font-bold text-primary md:text-4xl">Featured Project</h2>
-                        <p className=" text-st_lightest">
+                        <h2 className="mb-4 text-3xl font-bold text-primary group-hover/feature-spotlight:text-primary_light md:text-4xl">
+                            Featured Project
+                        </h2>
+                        <p className=" text-st_lightest group-hover/feature-spotlight:text-st_white">
                             Take a closer look at one of our most impressive projects that showcases our expertise and capabilities.
                         </p>
                     </div>
@@ -82,13 +84,13 @@ export default function PortfolioComponentServer() {
             </div>
 
             {/* Portfolio Waterfall */}
-            <div id="portfolio" className="w-full py-16 bg-st_dark md:py-20 group/portfolio">
+            <div id="portfolio" className="w-full py-16 bg-st_darkest md:py-20 group/portfolio-waterfall">
                 <div className="w-full">
                     <div className="mb-12 text-center px-8">
-                        <h2 className="mb-4 text-3xl font-bold text-primary group-hover/portfolio:text-primary_light md:text-4xl">
+                        <h2 className="mb-4 text-3xl font-bold text-primary group-hover/portfolio-waterfall:text-primary_light md:text-4xl">
                             Our Projects
                         </h2>
-                        <p className="mx-auto max-w-2xl text-st_lightest group-hover/portfolio:text-st_white">
+                        <p className="mx-auto max-w-2xl text-st_lightest group-hover/portfolio-waterfall:text-st_white">
                             Browse through our diverse portfolio of successful projects across multiple industries and technologies.
                         </p>
                     </div>
@@ -130,7 +132,7 @@ export default function PortfolioComponentServer() {
                     },
                 ]}
                 variant="simple"
-                bgColor="bg-st_darkest"
+                bgColor="bg-st"
                 textColor="text-st_white"
                 titleColor="text-primary"
             />
