@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
 import { sendContactFormEmail } from './actions';
-import ContactComponentServer from './Contact.Component.Server';
 import CallToAction from '@/components/ui/CallToAction';
+import HeroSection from '@/components/ui/HeroSection';
+
 type ContactFormData = {
     name: string;
     email: string;
@@ -49,8 +50,42 @@ export default function ContactComponent() {
 
     return (
         <div className="bg-st_darkest text-st_white">
-            {/* Use the server component for the hero section */}
-            <ContactComponentServer />
+            {/* Hero Section with Wavy Background */}
+            <HeroSection
+                title="Contact Us"
+                description="We're here to help with all your technology needs. Reach out to us today."
+                buttons={[
+                    {
+                        text: 'Call Us',
+                        link: 'tel:9162697703',
+                        iconName: 'Phone',
+                        iconPosition: 'left',
+                        textColor: 'primary',
+                        textHoverColor: 'st_darkest',
+                        bgHoverColor: 'primary',
+                        borderColor: 'primary',
+                    },
+                    {
+                        text: 'Email Us',
+                        link: 'mailto:mdrservices916@gmail.com',
+                        iconName: 'Mail',
+                        iconPosition: 'left',
+                        textColor: 'primary',
+                        textHoverColor: 'st_darkest',
+                        bgHoverColor: 'primary',
+                        borderColor: 'primary',
+                    },
+                ]}
+                backgroundType="wavy"
+                contentBgOpacity={0.7}
+                glowColor="primary"
+                glowSize="100px"
+                wavyBlur={8}
+                wavySpeed="fast"
+                wavyWaveWidth={60}
+                wavyWaveOpacity={0.6}
+                wavyVerticalOffset={25}
+            />
 
             {/* Contact Information */}
             <section className="py-16 bg-st flex flex-col items-center justify-center gap-8">

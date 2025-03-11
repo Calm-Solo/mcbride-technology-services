@@ -112,13 +112,15 @@ export default function HeroSection({
     glowColor = 'primary', // Default glow color
     glowSize = '80px', // Default glow size
 }: HeroSectionProps) {
-    // Add a key to force remount when navigating between pages
-    const [key, setKey] = React.useState(Date.now());
+    // Track animation completion state to avoid elements disappearing
+    const [animationsComplete, setAnimationsComplete] = React.useState(false);
 
-    // Use useEffect to update the key when the component mounts
+    // Make sure all elements are visible when the component is about to unmount
     React.useEffect(() => {
-        // Update the key to force a remount
-        setKey(Date.now());
+        return () => {
+            // Force all animations to complete when component unmounts
+            setAnimationsComplete(true);
+        };
     }, []);
 
     // Function to get the icon component based on name
@@ -211,10 +213,19 @@ export default function HeroSection({
                             }}></div>
 
                         <motion.h1
-                            key={`title-${key}`}
-                            initial={withAnimation ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
+                            key={`title`}
+                            initial={withAnimation && !animationsComplete ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
                             animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
+                            onAnimationComplete={() => {
+                                // Ensure title doesn't disappear after animation
+                                document.getElementById('hero-title')?.style.setProperty('opacity', '1', 'important');
+                            }}
+                            id="hero-title"
+                            style={{
+                                opacity: animationsComplete ? 1 : undefined,
+                            }}
                             className={`relative z-10 text-4xl md:text-5xl font-bold mb-6 ${titleColorClass} ${
                                 withAnimation ? `${titleColorHoverClass} transition-colors` : ''
                             }`}>
@@ -222,10 +233,19 @@ export default function HeroSection({
                         </motion.h1>
 
                         <motion.p
-                            key={`description-${key}`}
-                            initial={withAnimation ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
+                            key={`description`}
+                            initial={withAnimation && !animationsComplete ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
                             animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2, duration: 0.8 }}
+                            onAnimationComplete={() => {
+                                // Ensure description doesn't disappear after animation
+                                document.getElementById('hero-description')?.style.setProperty('opacity', '1', 'important');
+                            }}
+                            id="hero-description"
+                            style={{
+                                opacity: animationsComplete ? 1 : undefined,
+                            }}
                             className={`relative z-10 text-xl mb-8 ${descriptionColorClass} max-w-3xl ${centered ? 'mx-auto' : ''} ${
                                 withAnimation ? `${descriptionColorHoverClass} transition-colors` : ''
                             }`}>
@@ -234,10 +254,19 @@ export default function HeroSection({
 
                         {buttons.length > 0 && (
                             <motion.div
-                                key={`buttons-${key}`}
-                                initial={withAnimation ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
+                                key={`buttons-container`}
+                                initial={withAnimation && !animationsComplete ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
                                 animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4, duration: 0.8 }}
+                                onAnimationComplete={() => {
+                                    // Ensure buttons container doesn't disappear after animation
+                                    document.getElementById('hero-buttons-container')?.style.setProperty('opacity', '1', 'important');
+                                }}
+                                id="hero-buttons-container"
+                                style={{
+                                    opacity: animationsComplete ? 1 : undefined,
+                                }}
                                 className="relative z-20 flex flex-col sm:flex-row gap-4 justify-center">
                                 {buttons.map((button, index) => {
                                     // Determine if this is the primary button (first one or explicitly set)
@@ -307,12 +336,23 @@ export default function HeroSection({
 
                                     return (
                                         <motion.div
-                                            key={`button-${index}-${key}`}
-                                            initial={withAnimation ? { opacity: 0, y: 10 } : { opacity: 1, y: 0 }}
+                                            key={`button-${index}`}
+                                            initial={withAnimation && !animationsComplete ? { opacity: 0, y: 10 } : { opacity: 1, y: 0 }}
                                             animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 1, y: 0 }}
                                             transition={{
                                                 delay: 0.4 + index * 0.1 + (button.animation?.delay || 0),
                                                 duration: 0.5,
+                                            }}
+                                            onAnimationComplete={() => {
+                                                // Ensure button doesn't disappear after animation
+                                                document
+                                                    .getElementById(`hero-button-${index}`)
+                                                    ?.style.setProperty('opacity', '1', 'important');
+                                            }}
+                                            id={`hero-button-${index}`}
+                                            style={{
+                                                opacity: animationsComplete ? 1 : undefined,
                                             }}
                                             className="w-full sm:w-auto relative z-10">
                                             {button.link.startsWith('#') ? (
