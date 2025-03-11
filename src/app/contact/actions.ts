@@ -33,7 +33,7 @@ export async function sendContactFormEmail(formData: ContactFormData) {
         for (const admin_email of admin_emails) {
             console.log(`Sending email to ${admin_email}`);
             await sendEmail({
-                from: 'contact@mcbridetechnology.com',
+                from: 'contact@mcbridetechservices.com',
                 to: email_to,
                 subject: `New Contact Form Submission: ${formData.subject}`,
                 html: await email_html,
