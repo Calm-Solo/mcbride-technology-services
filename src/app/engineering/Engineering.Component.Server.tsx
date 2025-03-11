@@ -133,7 +133,7 @@ export default function FreelanceEngineeringComponentServer() {
             </section>
 
             {/* Technologies */}
-            <section className="bg-st py-4 group/tech-section relative overflow-hidden">
+            <section className="bg-st pt-4 pb-16 group/tech-section relative overflow-hidden">
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-6xl mx-auto">
                         <div className="text-center mb-16">
