@@ -1,9 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { PortfolioItem, PortfolioItemTag } from '@/lib/constants/Portfolio.Constants';
 import { ExternalLink } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -16,14 +15,58 @@ export interface PortfolioWaterfallItemProps {
 export default function PortfolioWaterfallItem({ item, index }: PortfolioWaterfallItemProps) {
     // Determine if this item should have the image on the left or right
     const isEven = index % 2 === 0;
+    const [isVisible, setIsVisible] = useState(false);
+    const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        // Check if element is already in viewport when component mounts
+        const checkInitialVisibility = () => {
+            if (ref.current) {
+                const rect = ref.current.getBoundingClientRect();
+                const isInViewport = rect.top <= (window.innerHeight || document.documentElement.clientHeight) && rect.bottom >= 0;
+
+                if (isInViewport) {
+                    // If already in viewport, make it visible immediately
+                    setIsVisible(true);
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        // If not already visible, set up the observer
+        if (!checkInitialVisibility()) {
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    if (entry.isIntersecting) {
+                        setIsVisible(true);
+                        observer.disconnect();
+                    }
+                },
+                { threshold: 0.2 }
+            );
+
+            if (ref.current) {
+                observer.observe(ref.current);
+            }
+
+            return () => {
+                observer.disconnect();
+            };
+        }
+    }, []);
 
     return (
         <Link href={item.link} target="_blank" rel="noopener noreferrer">
-            <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-                className="group/portfolio-item relative overflow-hidden rounded-lg bg-st shadow-lg transition-all duration-300 hover:shadow-xl hover:bg-st_light mb-16">
+            <div
+                ref={ref}
+                className={cn(
+                    'group/portfolio-item relative overflow-hidden rounded-lg bg-st shadow-lg transition-all duration-300 hover:shadow-xl hover:bg-st_light mb-16',
+                    'transform transition-all duration-700 ease-out',
+                    !isVisible && 'opacity-0',
+                    !isVisible && (isEven ? '-translate-x-96' : 'translate-x-96'),
+                    isVisible && 'opacity-100 translate-x-0'
+                )}>
                 <div className={cn('flex flex-col md:flex-row items-center gap-6 p-6', !isEven && 'md:flex-row-reverse')}>
                     {/* Image Side */}
                     <div className="relative aspect-video w-full md:w-1/2 overflow-hidden rounded-lg">
@@ -39,46 +82,29 @@ export default function PortfolioWaterfallItem({ item, index }: PortfolioWaterfa
 
                     {/* Content Side */}
                     <div className="w-full md:w-1/2 flex flex-col gap-4">
-                        <motion.h3
-                            initial={{ opacity: 0, x: isEven ? -20 : 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.15 + 0.2 }}
-                            className="text-2xl md:text-3xl font-semibold text-primary group-hover/portfolio-item:text-primary_light">
+                        <h3 className="text-2xl md:text-3xl font-semibold text-primary group-hover/portfolio-item:text-primary_light">
                             {item.title}
-                        </motion.h3>
+                        </h3>
 
-                        <motion.p
-                            initial={{ opacity: 0, x: isEven ? -20 : 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.15 + 0.3 }}
-                            className="text-st_white">
-                            {item.description}
-                        </motion.p>
+                        <p className="text-st_white">{item.description}</p>
 
-                        <motion.div
-                            initial={{ opacity: 0, x: isEven ? -20 : 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.15 + 0.4 }}
-                            className="flex flex-wrap gap-2 mt-2">
+                        <div className="flex flex-wrap gap-2 mt-2">
                             {item.tags.map((tag, tagIndex) => (
                                 <TagBadge key={tagIndex} tag={tag} />
                             ))}
-                        </motion.div>
+                        </div>
 
-                        <motion.div
-                            initial={{ opacity: 0, x: isEven ? -20 : 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.15 + 0.5 }}
+                        <div
                             className={
                                 `inline-flex w-fit px-4 py-2 mt-4 rounded-lg items-center gap-2 text-primary border border-primary transition-colors hover:!text-st_darkest hover:bg-primary_light ` +
                                 `group-hover/portfolio-item:border-primary_light group-hover/portfolio-item:text-primary_light`
                             }>
                             <span>Visit Project</span>
                             <ExternalLink size={16} />
-                        </motion.div>
+                        </div>
                     </div>
                 </div>
-            </motion.div>
+            </div>
         </Link>
     );
 }

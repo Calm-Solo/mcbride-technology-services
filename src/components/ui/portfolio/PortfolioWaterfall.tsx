@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
 import { PortfolioItem, PortfolioItemTag } from '@/lib/constants/Portfolio.Constants';
 import PortfolioWaterfallItem from './PortfolioWaterfallItem';
 import { cn } from '@/lib/utils';
@@ -29,6 +28,8 @@ interface PortfolioWaterfallProps {
 export default function PortfolioWaterfall({ items, tags = [] }: PortfolioWaterfallProps) {
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [filteredItems, setFilteredItems] = useState<PortfolioItem[]>(items);
+    const [filterVisible, setFilterVisible] = useState(false);
+    const filterRef = useRef<HTMLDivElement>(null);
 
     // Filter items when selected tags change
     useEffect(() => {
@@ -38,6 +39,44 @@ export default function PortfolioWaterfall({ items, tags = [] }: PortfolioWaterf
             setFilteredItems(items);
         }
     }, [selectedTags, items]);
+
+    // Animation for filter section
+    useEffect(() => {
+        // Check if filter section is already in viewport
+        const checkInitialVisibility = () => {
+            if (filterRef.current) {
+                const rect = filterRef.current.getBoundingClientRect();
+                const isInViewport = rect.top <= (window.innerHeight || document.documentElement.clientHeight) && rect.bottom >= 0;
+
+                if (isInViewport) {
+                    setFilterVisible(true);
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        // If not already visible, set up the observer
+        if (!checkInitialVisibility()) {
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    if (entry.isIntersecting) {
+                        setFilterVisible(true);
+                        observer.disconnect();
+                    }
+                },
+                { threshold: 0.1 }
+            );
+
+            if (filterRef.current) {
+                observer.observe(filterRef.current);
+            }
+
+            return () => {
+                observer.disconnect();
+            };
+        }
+    }, []);
 
     // Get unique tags from items for the filter
     let uniqueTags =
@@ -81,11 +120,13 @@ export default function PortfolioWaterfall({ items, tags = [] }: PortfolioWaterf
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Filter Controls */}
             {uniqueTags.length > 0 && (
-                <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="mb-12">
+                <div
+                    ref={filterRef}
+                    className={cn(
+                        'mb-12 transform transition-all duration-500 ease-out',
+                        !filterVisible && 'opacity-0 -translate-y-12',
+                        filterVisible && 'opacity-100 translate-y-0'
+                    )}>
                     <div className="flex flex-wrap items-center gap-2 justify-center">
                         <button
                             onClick={() => setSelectedTags([])}
@@ -158,33 +199,24 @@ export default function PortfolioWaterfall({ items, tags = [] }: PortfolioWaterf
                             )}
                         </div>
                     </div>
-                </motion.div>
+                </div>
             )}
 
             {/* Portfolio Waterfall */}
-            <motion.div layout className="flex flex-col">
+            <div className="flex flex-col space-y-16">
                 {filteredItems.map((item, index) => (
-                    <motion.div
-                        key={item.title}
-                        layout
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 20 }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}>
+                    <div key={item.title} className="overflow-hidden">
                         <PortfolioWaterfallItem item={item} index={index} />
-                    </motion.div>
+                    </div>
                 ))}
-            </motion.div>
+            </div>
 
             {/* Empty state */}
             {filteredItems.length === 0 && (
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="flex flex-col items-center justify-center py-16 text-center">
+                <div className="flex flex-col items-center justify-center py-16 text-center opacity-80 animate-fadeIn">
                     <h3 className="text-xl font-medium text-st_lightest mb-2">No projects found</h3>
                     <p className="text-st_light">Try selecting a different filter or check back later.</p>
-                </motion.div>
+                </div>
             )}
         </div>
     );
