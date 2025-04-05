@@ -3,6 +3,7 @@
 import React from 'react';
 import { Toaster } from 'react-hot-toast';
 import 'react-tooltip/dist/react-tooltip.css';
+import { ClerkProvider } from '@clerk/nextjs';
 
 interface RootProviderProps {
     children: React.ReactNode;
@@ -10,12 +11,16 @@ interface RootProviderProps {
 
 /**
  * Root provider component for the application
- * Currently includes toast notifications and tooltip styles
- * Future providers (authentication, state management, etc.) will be added here
+ * Includes Clerk authentication, toast notifications, and tooltip styles
  */
 export function RootProvider({ children }: RootProviderProps) {
     return (
-        <>
+        <ClerkProvider
+            appearance={{
+                baseTheme: undefined,
+                variables: { colorPrimary: '#57cc99' },
+                layout: { shimmer: true },
+            }}>
             {children}
             <Toaster
                 position="bottom-right"
@@ -33,6 +38,6 @@ export function RootProvider({ children }: RootProviderProps) {
                     },
                 }}
             />
-        </>
+        </ClerkProvider>
     );
 }
