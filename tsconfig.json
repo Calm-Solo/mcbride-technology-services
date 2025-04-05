@@ -23,7 +23,8 @@
             "@/*": ["*"],
             "@/components/*": ["components/*"],
             "@/actions/*": ["actions/*"],
-            "@/lib/*": ["lib/*"]
+            "@/lib/*": ["lib/*"],
+            "@/styles/*": ["styles/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

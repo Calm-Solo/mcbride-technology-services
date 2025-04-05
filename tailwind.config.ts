@@ -26,12 +26,14 @@ const config: Config = {
                 gold: '#E7A94B', // Gold
                 gold_light: '#F2C777', // Light gold
 
-                st_darkest: '#111827', // Dark slate
-                st_dark: '#1F2937', // Slate
-                st: '#374151', // Medium slate
-                st_light: '#4B5563', // Light slate
-                st_lightest: '#6B7280', // Lightest slate
-                st_white: '#F9FAFB', // Off-white
+                st_darkest: '#020617', // slate-950
+                st_darker: '#0f172a', // slate-900
+                st_dark: '#1e293b', // slate-800
+                st: '#334155', // slate-700
+                st_light: '#64748b', // slate-500
+                st_lighter: '#94a3b8', // slate-400
+                st_lightest: '#cbd5e1', // slate-300
+                st_white: '#f8fafc', // slate-50
 
                 white: '#ffffff',
                 link: '#3B82F6', // Blue

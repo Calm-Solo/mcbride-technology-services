@@ -1,77 +1,36 @@
 'use server';
 
-import { currentUser } from '@clerk/nextjs/server';
 import { clerkClient } from '@clerk/nextjs/server';
-import { ClerkUser, ClerkApiUser } from '@/types/clerk';
+import { ClerkUser } from '@/types/clerk';
 
 /**
- * Fetch all admin users from Clerk
- * This function will fetch users with admin role
+ * Get a Clerk user by ID
  */
-export async function getAdminUsers(): Promise<{
-    success: boolean;
-    data: ClerkUser[];
-    message?: string;
-}> {
+export async function getClerkUser(userId: string): Promise<ClerkUser | null> {
     try {
-        // Check if user is authenticated
-        const user = await currentUser();
-        if (!user) {
-            return {
-                success: false,
-                data: [],
-                message: 'Unauthorized',
-            };
-        }
-
-        // Fetch all users
         const clerk = await clerkClient();
-        const { data: users } = await clerk.users.getUserList({
-            limit: 100,
-        });
-
-        // Filter users with admin role
-        const adminUsers = users
-            .filter((user: ClerkApiUser) => {
-                const metadata = user.publicMetadata;
-                return (
-                    metadata &&
-                    (metadata.role === 'admin' ||
-                        metadata.role === 'Admin' ||
-                        (typeof metadata.role === 'string' && metadata.role.toLowerCase() === 'admin') ||
-                        metadata.isAdmin === true)
-                );
-            })
-            .map((user: ClerkApiUser) => ({
-                id: user.id,
-                firstName: user.firstName || '',
-                lastName: user.lastName || '',
-                email: user.emailAddresses[0]?.emailAddress || '',
-                imageUrl: user.imageUrl,
-                fullName: `${user.firstName || ''} ${user.lastName || ''}`.trim() || user.emailAddresses[0]?.emailAddress || user.id,
-            }));
+        const user = await clerk.users.getUser(userId);
 
         return {
-            success: true,
-            data: adminUsers,
+            id: user.id,
+            firstName: user.firstName || '',
+            lastName: user.lastName || '',
+            email: user.emailAddresses[0]?.emailAddress || '',
+            imageUrl: user.imageUrl,
+            fullName: `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Unknown User',
         };
     } catch (error) {
-        console.error('Error fetching admin users:', error);
-        return {
-            success: false,
-            data: [],
-            message: 'Failed to fetch admin users',
-        };
+        console.error(`Error getting Clerk user ${userId}:`, error);
+        return null;
     }
 }
 
 /**
- * Get user emails by user IDs
- * This function will fetch email addresses for the provided user IDs
+ * Get emails for multiple Clerk users by their IDs
  */
 export async function getUserEmailsByIds(userIds: string[]): Promise<{
     success: boolean;
-    data: { userId: string; email: string }[];
+    data: Array<{ id: string; email: string }>;
     message?: string;
 }> {
     try {
@@ -82,45 +41,93 @@ export async function getUserEmailsByIds(userIds: string[]): Promise<{
             };
         }
 
-        // Fetch users by IDs
         const clerk = await clerkClient();
+        const users = await Promise.all(
+            userIds.map(async (id) => {
+                try {
+                    const user = await clerk.users.getUser(id);
+                    return {
+                        id: user.id,
+                        email: user.emailAddresses[0]?.emailAddress || '',
+                    };
+                } catch (error) {
+                    console.error(`Error getting user ${id}:`, error);
+                    return null;
+                }
+            })
+        );
 
-        // Get unique user IDs
-        const uniqueUserIds = [...new Set(userIds)];
-
-        // Fetch users in batches to avoid hitting API limits
-        const batchSize = 20; // Clerk recommends smaller batch sizes
-        const batches = [];
-
-        for (let i = 0; i < uniqueUserIds.length; i += batchSize) {
-            batches.push(uniqueUserIds.slice(i, i + batchSize));
-        }
-
-        const allUsers = [];
-
-        for (const batch of batches) {
-            const users = await clerk.users.getUserList({
-                userId: batch,
-            });
-            allUsers.push(...users.data);
-        }
-
-        // Map users to their emails
-        const userEmails = allUsers.map((user: ClerkApiUser) => ({
-            userId: user.id,
-            email: user.emailAddresses[0]?.emailAddress || '',
-        }));
+        // Filter out null values and users with no email
+        const validUsers = users.filter((user): user is { id: string; email: string } => !!user && !!user.email);
 
         return {
             success: true,
-            data: userEmails.filter((item) => !!item.email), // Only return users with valid emails
+            data: validUsers,
         };
     } catch (error) {
-        console.error('Error fetching user emails:', error);
+        console.error('Error getting user emails:', error);
         return {
             success: false,
             data: [],
             message: 'Failed to fetch user emails',
+        };
+    }
+}
+
+/**
+ * Get all admin users from Clerk
+ */
+export async function getAdminUsers(): Promise<{
+    success: boolean;
+    data: Array<{
+        id: string;
+        fullName: string;
+        imageUrl: string;
+        initials: string;
+    }>;
+    message?: string;
+}> {
+    try {
+        const clerk = await clerkClient();
+        const { data: users } = await clerk.users.getUserList({
+            limit: 100,
+        });
+
+        // Filter for admin users and format return data
+        const adminUsers = users
+            .filter((user) => {
+                const role = user.publicMetadata?.role;
+                return role === 'admin' || role === 'superadmin';
+            })
+            .map((user) => {
+                const firstName = user.firstName || '';
+                const lastName = user.lastName || '';
+                const fullName = `${firstName} ${lastName}`.trim() || 'Unknown User';
+
+                // Generate initials from full name
+                const initials =
+                    firstName && lastName
+                        ? `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase()
+                        : fullName.substring(0, 2).toUpperCase();
+
+                return {
+                    id: user.id,
+                    fullName,
+                    imageUrl: user.imageUrl,
+                    initials,
+                };
+            });
+
+        return {
+            success: true,
+            data: adminUsers,
+        };
+    } catch (error) {
+        console.error('Error getting admin users:', error);
+        return {
+            success: false,
+            data: [],
+            message: 'Failed to fetch admin users',
         };
     }
 }

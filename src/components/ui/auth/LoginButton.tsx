@@ -9,7 +9,7 @@ interface LoginButtonProps {
     afterSignInUrl?: string;
 }
 
-export function LoginButton({ className, afterSignInUrl = '/dashboard' }: LoginButtonProps) {
+export function LoginButton({ className, afterSignInUrl = '/' }: LoginButtonProps) {
     const [showAuth, setShowAuth] = useState(false);
     const { isSignedIn, user } = useUser();
 

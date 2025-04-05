@@ -75,3 +75,60 @@ body {
 .animate-marquee {
     animation: marquee 40s linear infinite;
 }
+
+/* Custom Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px; /* Thin scrollbar */
+    height: 8px; /* For horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+    background-color: #1e293b; /* st_darker */
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #57cc99; /* primary color */
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #80ed99; /* primary_light color */
+}
+
+::-webkit-scrollbar-corner {
+    background-color: #1e293b; /* st_darker */
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #57cc99 #1e293b; /* primary color and st_darker */
+}
+
+/* For elements with dark backgrounds */
+.dark-scrollbar::-webkit-scrollbar-track {
+    background-color: #0f172a; /* st_darker */
+}
+
+.dark-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #38a3a5; /* primary_dark */
+}
+
+.dark-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #57cc99; /* primary */
+}
+
+/* For better visibility on light backgrounds */
+.light-scrollbar::-webkit-scrollbar-track {
+    background-color: #f1f5f9; /* A light grey background */
+}
+
+.light-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #57cc99; /* primary */
+}
+
+.light-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #38a3a5; /* primary_dark */
+}

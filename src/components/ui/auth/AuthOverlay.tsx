@@ -10,7 +10,7 @@ interface AuthOverlayProps {
     afterSignInUrl?: string;
 }
 
-export function AuthOverlay({ isOpen, onClose, afterSignInUrl = '/dashboard' }: AuthOverlayProps) {
+export function AuthOverlay({ isOpen, onClose, afterSignInUrl = '/' }: AuthOverlayProps) {
     return (
         <AnimatePresence>
             {isOpen && (
